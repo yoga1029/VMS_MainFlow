@@ -14,7 +14,7 @@ using VMS_Phase1PortalAT.FlowTest.Utilities.Datas;
 using WindowsInput;
 using WindowsInput.Native;
 
-namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
+namespace VMS_MainFlow   //same namespace
 {
     [TestClass]
     [DoNotParallelize]
@@ -123,7 +123,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
             }
         }
 
-        //[TestMethod]
+        
         //[Priority(5)]
         //public void Step5_AddBrand()
         //{
@@ -145,7 +145,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         //    }
         //}
 
-        //[TestMethod]
+
         //[Priority(6)]
         //public void Step6_AddCategory()
         //{
@@ -169,7 +169,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
 
 
 
-        //[TestMethod]
+     
         //[Priority(7)]
         //public void Step7_AddSubCategory()
         //{
@@ -192,7 +192,6 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         //}
 
 
-        //[TestMethod]
         //[Priority(8)]
         //public void Step8_AddProduct()
         //{
@@ -214,7 +213,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         //    }
         //}
 
-        //[TestMethod]
+        
         //[Priority(9)]
         //public void Step9_AddWarehouse()
         //{
@@ -236,7 +235,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         //    }
         //}
 
-        //[TestMethod]
+        
         //[Priority(10)]
         //public void Step10_AddVendor()
         //{
@@ -259,7 +258,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         //}
 
 
-        //[TestMethod]
+       
         //[Priority(11)]
         //public void Step11_ProductMapping()
         //{
@@ -281,7 +280,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         //    }
         //}
 
-        //[TestMethod]
+       
         //[Priority(12)]
         //public void Step12_AddPurchase()
         //{
@@ -305,7 +304,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
 
 
 
-        //[TestMethod]
+      
         //[Priority(13)]
         //public void Step13_RaiseRefillRequest()
         //{
@@ -328,7 +327,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         //}
 
 
-        //[TestMethod]
+       
         //[Priority(14)]
         //public void Step14_ReturnRequest()
         //{
@@ -351,7 +350,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         //}
 
 
-        //[TestMethod]
+        
         //[Priority(15)]
         //public void Step15_MachineScrapping()
         //{
@@ -414,7 +413,7 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
         }
 
     }
-        // ================= BRANCH CLASS =================
+    // ================= BRANCH CLASS =================
 
     public class AddBranch
     {
@@ -516,16 +515,16 @@ namespace VMS_Phase1PortalAT.FlowTest.TestFlows   //same namespace
                     //driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     //Thread.Sleep(4000); //Save button
 
-                    
+
                 }
             }
             catch
             {
                 Assert.Fail();
             }
-            }
         }
     }
+}
 
 
 //////////////////////  ================= CLIENT CLASS =================  ///////////////////////////////////////////
@@ -806,7 +805,7 @@ public class MachineMapping
         }
     }
 }
-    
+
 
 
 
