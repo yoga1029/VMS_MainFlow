@@ -14,7 +14,7 @@ pipeline {
 
                 catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
                     bat """
-                    dotnet test ${env.DOTNET_SOLUTION} --logger "console;verbosity=detailed"
+                    dotnet test ${env.DOTNET_SOLUTION} --logger "trx"
                     """
                 }
             }
