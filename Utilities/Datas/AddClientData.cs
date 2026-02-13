@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VMS_Phase1PortalAT.FlowTest.Utilities.Datas
+namespace VMS_MainFlow.Utilities.Datas
 {
     public class AddClientData
     {
