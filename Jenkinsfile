@@ -33,7 +33,7 @@ pipeline {
             echo 'Publishing MSTest results to Jenkins'
  
             // Always publish results (pass or fail)
-		mstest testResultsFile: 'test_results.trx'
+            mstest testResultsFile: '**/test_results.trx'
             echo "Sending email with test counts"
  
             emailext(
