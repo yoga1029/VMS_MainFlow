@@ -25,6 +25,7 @@ pipeline {
         --logger "trx;LogFileName=TestResults.trx" ^
         --results-directory TestResults
         """
+	
                 }
             }
         }
@@ -33,7 +34,7 @@ pipeline {
     post {
         always {
             echo 'Publishing MSTest results to Jenkins'
- 
+ 		bat 'dir /s *.trx'
             // Always publish results (pass or fail)
             mstest testResultsFile: '**/TestResults.trx'
             echo "Sending email with test counts"
