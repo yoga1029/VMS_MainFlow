@@ -10,10 +10,15 @@ namespace VMS_MainFlow.Utilities.Datas
     {
         public static string[,] Warehouses = new string[,]
         {
-            {
-                "Pudukkottai Warehouse", "Pudukkottai Warehouse", "10.322328285716925", "78.67931085899907", "Pudukkottai", "Tamilnadu", "Pudukkottai Branch",
-                 "9123456789", @"C:\Users\Yogeswari-PC\Pictures\ch.jpg"
+             {
+                "Madurai Warehouse", "Madurai Warehouse", "10.322328285716925", "78.67931085899907", "Pudukkottai", "Tamilnadu", "Madurai Branch",
+                 "9123006789", "images.jpg"
             },
+            
+            //{
+            //    "Pudukkottai Warehouse", "Pudukkottai Warehouse", "10.322328285716925", "78.67931085899907", "Pudukkottai", "Tamilnadu", "Pudukkottai Branch",
+            //     "9123456789", @"C:\Users\Yogeswari-PC\Pictures\ch.jpg"
+            //},
             //{
             //    "Karaikkudi Warehouse", "Karaikkudi Warehouse", "10.322328285716925", "78.67931085899907", "Pudukkottai", "Tamilnadu", "Pudukkottai Branch",
             //     "9123456789", @"C:\Users\Yogeswari-PC\Pictures\ch.jpg"

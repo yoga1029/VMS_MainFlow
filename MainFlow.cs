@@ -501,7 +501,6 @@ namespace VMS_MainFlow   //same namespace
 
                     string projectRoot = Directory.GetCurrentDirectory();
                     string fileName = AddBranchData.addBranchSuccess["fileUpload"];
-
                     string filePath = Path.Combine(projectRoot, "TestData", fileName);
 
                     branchLogo.SendKeys(filePath);
@@ -1325,13 +1324,24 @@ public class AddWarehouse
                     wait.Until(ExpectedConditions.ElementIsVisible(By.Name("phoneNo"))).SendKeys(AddWarehouseData.Warehouses[i, 7]);
                     Thread.Sleep(1000);
 
+                    // Click publish
+                    wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'publish')]"))).Click();
 
-                    wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span [contains(text(),'publish' )]"))).Click();
-                    Thread.Sleep(1000);
-                    var sim = new InputSimulator();
-                    sim.Keyboard.TextEntry(AddWarehouseData.Warehouses[i, 8]);
-                    sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-                    Thread.Sleep(1000);
+                    // Upload file directly
+                    IWebElement fileInput = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@type='file']")));
+
+                    string projectRoot = Directory.GetCurrentDirectory();
+                    string fileName = AddWarehouseData.Warehouses[i, 8];
+                    string filePath = Path.Combine(projectRoot, "TestData", fileName);
+
+                    fileInput.SendKeys(filePath);
+
+                    //wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span [contains(text(),'publish' )]"))).Click();
+                    //Thread.Sleep(1000);
+                    //var sim = new InputSimulator();
+                    //sim.Keyboard.TextEntry(AddWarehouseData.Warehouses[i, 8]);
+                    //sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                    //Thread.Sleep(1000);
 
 
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
