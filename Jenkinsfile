@@ -2,27 +2,20 @@ pipeline {
     agent any
 
     environment {
-        DOTNET_SOLUTION = 'GIT_VMS-Phase1PortalAT.sln'
+        DOTNET_SOLUTION = 'VMS_MainFlow.sln'
         EMAIL_FROM = 'scheduledautomationtrigger@gmail.com'
         EMAIL_TO ='yogeswari@riota.in'
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Code downloaded from GitHub'
-            }
-        }
-
-           stage('Run Tests') {
+        stage('Run Tests') {
             steps {
                 echo "Running MSTest tests on solution ${env.DOTNET_SOLUTION}"
 
-                // Allow pipeline to continue even if tests fail
                 catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                  bat """
-                dotnet test ${env.DOTNET_SOLUTION} --logger "console;verbosity=detailed"
-                """
+                    bat """
+                    dotnet test ${env.DOTNET_SOLUTION} --logger "console;verbosity=detailed"
+                    """
                 }
             }
         }
@@ -32,8 +25,7 @@ pipeline {
         always {
             echo 'Publishing MSTest results to Jenkins'
 
-            // Always publish results (pass or fail)
-            mstest testResultsFile: '**/test_results.trx'
+            mstest testResultsFile: '**/*.trx'
 
             echo "Sending email with test counts"
 
