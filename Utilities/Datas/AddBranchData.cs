@@ -10,17 +10,17 @@ namespace VMS_Phase1PortalAT.FlowTest.Utilities.Datas
     {
         public static Dictionary<string, string> addBranchSuccess = new Dictionary<string, string>
         {
-            {"searchName", "Automation Branch"},
-            { "name", "Automation Branch" },
+            {"searchName", "AutoTest Branch"},
+            { "name", "AutoTest Branch" },
             { "location", "Chennai" },
-            { "code", "111" },
-            { "email", "autobranch@gmail.com"},
+            { "code", "011" },
+            { "email", "autobranch1@gmail.com"},
             { "address", "AMA Nagar, Nizam Colony, Pudukkottai, 612001" },
-            { "contactDetails",  "9159617718" },
-            { "gstNo","ABCDKFGH12345IJ" },
-            { "companyName", "No0olMozhi"},
-            { "companyContactNo", "9081140521" },
-            { "companyEmail", "noolmghhi@gmail.com" },
+            { "contactDetails",  "9159007718" },
+            { "gstNo","ABCKKFGH12345IJ" },
+            { "companyName", "No0olMoxhi"},
+            { "companyContactNo", "9081040521" },
+            { "companyEmail", "noolmg0hhi@gmail.com" },
             { "companyAddress", "AMA Nagar, Nizam Colony, Pudukkottai, 612001" },
             { "fileUpload", "images.jpg" }
         };

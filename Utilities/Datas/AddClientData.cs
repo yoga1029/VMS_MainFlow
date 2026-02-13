@@ -11,10 +11,14 @@ namespace VMS_Phase1PortalAT.FlowTest.Utilities.Datas
         // Field order: searchName, name, branch, contactno, email, address, gstNo, companyName, companyContactNo, companyEmail, companyAddress
         public static string[,] Clients = new string[,]
         {
-            {
-                "Nithra", "Nithra", "Pudukkottai Branch", "9123456789", "Nithra@gmail.com", "11, Alagar Nagar, Trichy",
-                "31ABC1234567ZQ1", "Mercury", "9123456789", "Nithra@mercury.in", "Pudukkottai"
+           {
+                "AutoTestClient", "AutoTestClient", "Pudukkottai Branch", "9123406789", "Nithraa@gmail.com", "14, Alagar Nagar, Trichy",
+                "31ABC1235567ZQ1", "Mercuury", "9123056789", "Nithr2a@mercury.in", "Pudukkoottai"
             },
+            //{
+            //    "Nithra", "Nithra", "Pudukkottai Branch", "9123456789", "Nithra@gmail.com", "11, Alagar Nagar, Trichy",
+            //    "31ABC1234567ZQ1", "Mercury", "9123456789", "Nithra@mercury.in", "Pudukkottai"
+            //},
 
             //{
             //    "Naresh", "Naresh", "Pudukkottai Branch", "9112345678", "Naresh@gmail.com", "AB Colony, Ranga Street, Madurai",
