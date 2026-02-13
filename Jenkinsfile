@@ -20,9 +20,11 @@ pipeline {
  
                 // Allow pipeline to continue even if tests fail
                 catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                  bat """
-		dotnet test ${env.DOTNET_SOLUTION} --logger "trx;LogFileName=test_results.trx" --results-directory "%WORKSPACE%"	
-                """
+                 bat """
+        dotnet test VMS_MainFlow.sln ^
+        --logger "trx;LogFileName=TestResults.trx" ^
+        --results-directory TestResults
+        """
                 }
             }
         }
@@ -33,7 +35,7 @@ pipeline {
             echo 'Publishing MSTest results to Jenkins'
  
             // Always publish results (pass or fail)
-            mstest testResultsFile: '**/test_results.trx'
+            mstest testResultsFile: '**/TestResults.trx'
             echo "Sending email with test counts"
  
             emailext(
