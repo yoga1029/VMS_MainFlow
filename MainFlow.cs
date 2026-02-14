@@ -2004,6 +2004,7 @@ public class RaiseRefillRequest
             Thread.Sleep(2000);
             driver.Navigate().Back();
             Thread.Sleep(2000);
+            Console.WriteLine("Status of the Machine is set to Down Planned");
 
             IWebElement machineFilter1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@name = 'searchText']")));
             machineFilter1.Click();
@@ -2026,13 +2027,15 @@ public class RaiseRefillRequest
             Thread.Sleep(1000);
             driver.Navigate().Back();
             Thread.Sleep(3000);
+            Console.WriteLine("Refill Request Created");
 
             //Warehouse Assigning
             IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
             warTransactionsButton.Click();
             Thread.Sleep(3000);
-
-            IWebElement refillRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions2")));
+            
+            IWebElement refillRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[normalize-space()='Refill Request']")));
+            // IWebElement refillRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions2")));
             refillRequestMenu.Click();
             Thread.Sleep(3000);
 
