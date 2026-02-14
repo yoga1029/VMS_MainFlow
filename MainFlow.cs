@@ -1552,7 +1552,7 @@ public class Productmapping
 
 
             IWebElement editInfo = wait.Until(
-                ExpectedConditions.ElementToBeClickable(By.XPath("//button[@mattooltip='Edit Info']")));
+                ExpectedConditions.ElementIsVisible(By.XPath("//button[@mattooltip='Edit Info']")));
             editInfo.Click();
             Thread.Sleep(3000);
             Console.WriteLine("Entered into Machine Details Page");
