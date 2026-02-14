@@ -433,6 +433,7 @@ namespace VMS_MainFlow   //same namespace
             IWebElement loginButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector("button.mat-raised-button")));
             loginButton.Click();
             Thread.Sleep(2000);
+            Console.WriteLine("Login Successfull");
         }
 
     }
@@ -463,7 +464,7 @@ namespace VMS_MainFlow   //same namespace
                 IWebElement branchListSubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Branch List')]")));
                 branchListSubModule.Click();
                 Thread.Sleep(2000);
-
+                Console.WriteLine("Entered in to Branch ");
 
                 string searchName = AddBranchData.addBranchSuccess["searchName"];
                 IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
@@ -577,7 +578,7 @@ public class AddClient
             IWebElement clientButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Company1")));
             clientButton.Click();
             Thread.Sleep(2000);
-
+            Console.WriteLine("Entered in to Client ");
             for (int i = 0; i < AddClientData.Clients.GetLength(0); i++)
             {
                 string searchName = AddClientData.Clients[i, 0];
@@ -2028,24 +2029,37 @@ public class RaiseRefillRequest
             Thread.Sleep(3000);
             Console.WriteLine("Refill Request Created");
 
-            //Warehouse Assigning
-            IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
-            warTransactionsButton.Click();
-            Thread.Sleep(3000);
-            Console.WriteLine("Clicked on Warehouse transaction button");
+            ////Warehouse Assigning
+            //IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
+            //warTransactionsButton.Click();
+            //Thread.Sleep(3000);
+            //Console.WriteLine("Clicked on Warehouse transaction button");
 
-            //IWebElement refillRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[normalize-space()='Refill Request']")));
             // IWebElement refillRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions2")));
-            IWebElement refillRequestMenu = wait.Until(
-    ExpectedConditions.ElementToBeClickable(
-        By.Id("menuItem-W. Transactions2")
-    )
-);
-            ((IJavaScriptExecutor)driver)
-    .ExecuteScript("arguments[0].scrollIntoView({block:'center'});", refillRequestMenu);
+            // refillRequestMenu.Click();
+            IWebElement warTransactionsButton = wait.Until(
+                ExpectedConditions.ElementToBeClickable(
+                    By.Id("menuItem-W. Transactions")
+                )
+            );
 
+            ((IJavaScriptExecutor)driver)
+                .ExecuteScript("arguments[0].click();", warTransactionsButton);
+
+            // Locate the submenu element (even if not visible yet)
+            IWebElement refillRequestMenu = wait.Until(
+                ExpectedConditions.ElementExists(
+                    By.Id("menuItem-W. Transactions2")
+                )
+            );
+
+            // Scroll that specific element into view
+            ((IJavaScriptExecutor)driver)
+                .ExecuteScript("arguments[0].scrollIntoView({block:'center'});", refillRequestMenu);
+
+            // Now click
+            wait.Until(ExpectedConditions.ElementToBeClickable(refillRequestMenu));
             refillRequestMenu.Click();
-            //refillRequestMenu.Click();
             Thread.Sleep(3000);
 
             IWebElement actionButton1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[13]")));
