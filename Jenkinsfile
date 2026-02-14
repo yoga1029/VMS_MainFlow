@@ -16,6 +16,7 @@ pipeline {
 
                 catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
                     bat """
+                    if exist TestResults rmdir /s /q TestResults
                     dotnet test ${env.DOTNET_SOLUTION} ^
                     --logger trx ^
   	            --logger "console;verbosity=detailed" ^
