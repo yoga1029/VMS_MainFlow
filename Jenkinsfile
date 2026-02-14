@@ -18,6 +18,7 @@ pipeline {
                     bat """
                     dotnet test ${env.DOTNET_SOLUTION} ^
                     --logger trx ^
+  	            --logger "console;verbosity=detailed" ^
                     --results-directory TestResults
                     """
                 }

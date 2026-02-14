@@ -11,7 +11,7 @@ namespace VMS_MainFlow.Utilities.Datas
         public static string[,] Warehouses = new string[,]
         {
              {
-                "Madurai Warehouse", "Madurai Warehouse", "10.322328285716925", "78.67931085899907", "Pudukkottai", "Tamilnadu", "Madurai Branch",
+                "Madurai Warehouse", "Madurai Warehouse", "10.322328285716925", "78.67931085899907", "Pudukkottai", "Tamilnadu", "Pudukkottai Branch",
                  "9123006789", "images.jpg"
             },
             
