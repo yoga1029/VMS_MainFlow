@@ -7,6 +7,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
+using System.Drawing;
 using System.Linq.Expressions;
 using System.Reflection.PortableExecutable;
 using System.Threading;
@@ -29,9 +30,16 @@ namespace VMS_MainFlow   //same namespace
         [ClassInitialize]
         public static void ClassSetup(TestContext context)
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
+            var options = new ChromeOptions();
+            options.AddArgument("--window-size=1920,1080");
+            Console.WriteLine("Window size: " + driver.Manage().Window.Size);
             driver.Navigate().GoToUrl("https://cloud-test.vendolite.com/");
+            driver = new ChromeDriver(options);
+            driver.Manage().Window.Size = new Size(1920, 1080);
+
+            //driver = new ChromeDriver();
+            //driver.Manage().Window.Maximize();
+            //driver.Navigate().GoToUrl("https://cloud-test.vendolite.com/");
             extent = ExtentManager.GetInstance();
         }
 
