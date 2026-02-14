@@ -32,15 +32,21 @@ namespace VMS_MainFlow   //same namespace
         {
             var options = new ChromeOptions();
             options.AddArgument("--window-size=1920,1080");
-            Console.WriteLine("Window size: " + driver.Manage().Window.Size);
-            driver.Navigate().GoToUrl("https://cloud-test.vendolite.com/");
-            driver = new ChromeDriver(options);
+
+            driver = new ChromeDriver(options);  // ✅ Create driver FIRST
+
             driver.Manage().Window.Size = new Size(1920, 1080);
+
+            Console.WriteLine("Window size: " + driver.Manage().Window.Size);
+
+            driver.Navigate().GoToUrl("https://cloud-test.vendolite.com/");
+
+            extent = ExtentManager.GetInstance();
 
             //driver = new ChromeDriver();
             //driver.Manage().Window.Maximize();
             //driver.Navigate().GoToUrl("https://cloud-test.vendolite.com/");
-            extent = ExtentManager.GetInstance();
+            //extent = ExtentManager.GetInstance();
         }
 
         [TestMethod]
