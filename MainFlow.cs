@@ -519,9 +519,10 @@ namespace VMS_MainFlow   //same namespace
 
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                Assert.Fail();
+                Console.WriteLine(ex.ToString());
+                Assert.Fail(ex.Message);
             }
         }
     }
@@ -599,9 +600,10 @@ public class AddClient
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
     }
 }
@@ -800,9 +802,10 @@ public class MachineMapping
 
         }
 
-        catch
+        catch (Exception ex)
         {
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
     }
 }
@@ -882,9 +885,10 @@ public class AddBrand
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
     }
 }
@@ -973,9 +977,10 @@ public class AddCategory
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
     }
 }
@@ -1070,9 +1075,10 @@ public class AddSubCategory
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
     }
 }
@@ -1239,9 +1245,10 @@ public class AddProduct
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
     }
 }
@@ -1453,9 +1460,10 @@ public class AddVendor
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
     }
 }
