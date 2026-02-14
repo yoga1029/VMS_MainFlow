@@ -31,11 +31,14 @@ namespace VMS_MainFlow   //same namespace
         public static void ClassSetup(TestContext context)
         {
             var options = new ChromeOptions();
+            options.AddArgument("--headless=new");
             options.AddArgument("--window-size=1920,1080");
+            options.AddArgument("--disable-gpu");
+            options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--force-device-scale-factor=1");
+            options.AddArgument("--no-sandbox");
 
-            driver = new ChromeDriver(options);  // ✅ Create driver FIRST
-
-            driver.Manage().Window.Size = new Size(1920, 1080);
+            driver = new ChromeDriver(options);
 
             Console.WriteLine("Window size: " + driver.Manage().Window.Size);
 
