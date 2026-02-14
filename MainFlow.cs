@@ -2024,8 +2024,6 @@ public class RaiseRefillRequest
 
             IWebElement saveRequest = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//button[.//span[text()=' Save ']]")));
             saveRequest.Click();
-            Thread.Sleep(1000);
-            driver.Navigate().Back();
             Thread.Sleep(3000);
             Console.WriteLine("Refill Request Created");
 
@@ -2033,7 +2031,8 @@ public class RaiseRefillRequest
             IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
             warTransactionsButton.Click();
             Thread.Sleep(3000);
-            
+            Console.WriteLine("Clicked on Warehouse transaction button");
+
             IWebElement refillRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[normalize-space()='Refill Request']")));
             // IWebElement refillRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions2")));
             refillRequestMenu.Click();
