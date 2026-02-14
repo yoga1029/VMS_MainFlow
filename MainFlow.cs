@@ -1328,11 +1328,14 @@ public class AddWarehouse
                     wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'publish')]"))).Click();
 
                     // Upload file directly
-                    IWebElement fileInput = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@type='file']")));
+                    IWebElement fileInput = wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@type='file']")));
 
                     string projectRoot = Directory.GetCurrentDirectory();
                     string fileName = AddWarehouseData.Warehouses[i, 8];
                     string filePath = Path.Combine(projectRoot, "TestData", fileName);
+
+                    Console.WriteLine("File path: " + filePath);
+                    Console.WriteLine("Exists: " + File.Exists(filePath));
 
                     fileInput.SendKeys(filePath);
 
@@ -1354,9 +1357,10 @@ public class AddWarehouse
 
             }
         }
-        catch
+        catch (Exception ex)
         {
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
     }
 }
