@@ -5,7 +5,7 @@ pipeline {
     environment {
         DOTNET_SOLUTION = 'VMS_MainFlow.sln'
         EMAIL_FROM = 'scheduledautomationtrigger@gmail.com'
-        EMAIL_TO = 'yogeswari@riota.in'
+        EMAIL_TO = 'yogeswari@riota.in,sujitganeash@riota.in'
     }
 
     stages {
