@@ -1543,7 +1543,8 @@ public class Productmapping
             Thread.Sleep(1000);
             IWebElement saveSlots = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(), ' Save ')]")));
             saveSlots.Click();
-            Console.WriteLine("Product Matrix Changed again");
+            Thread.Sleep(3000);
+            Console.WriteLine("Product Matrix Changed");
 
             ///* wait for Angular overlay/backdrop to disappear */
             //wait.Until(ExpectedConditions.InvisibilityOfElementLocated(
@@ -1554,6 +1555,7 @@ public class Productmapping
                 ExpectedConditions.ElementToBeClickable(By.XPath("//button[@mattooltip='Edit Info']")));
             editInfo.Click();
             Thread.Sleep(3000);
+            Console.WriteLine("Entered into Machine Details Page");
 
             IWebElement clientLocation = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("clientLocation")));
             clientLocation.Clear();
@@ -1600,6 +1602,7 @@ public class Productmapping
             IWebElement saveButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'Save')]")));
             saveButton.Click();
             Thread.Sleep(3000);
+            Console.WriteLine("Exited from Machine Details Page");
 
 
             //// Edit Single Slot 
@@ -1674,7 +1677,7 @@ public class Productmapping
 
             //Modify Planogram after Product Mapping
             IWebElement editSlot1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[@mattooltip='Edit Slot']")));
-            editSlot1.Click();
+            editSlot.Click();
             Thread.Sleep(1000);
 
             IWebElement slotRowCount1 = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("slotRowCount")));
@@ -1699,6 +1702,7 @@ public class Productmapping
             saveSlots1.Click();
             Console.WriteLine("Product Matrix Changed again");
             Thread.Sleep(2000);
+
 
         }
         catch
