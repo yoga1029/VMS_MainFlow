@@ -908,7 +908,7 @@ public class AddBrand
                 }
             }
         }
-        catch (Exception ex)
+        catch 
         {
             // Take screenshot
             screenshotDriver = (ITakesScreenshot)driver;
@@ -931,9 +931,10 @@ public class AddBrand
             screenshot.SaveAsFile(filePath2);
 
             Console.WriteLine($"Screenshot saved at: {filePath2}");
+            Assert.Fail();
 
-            Console.WriteLine(ex.ToString());
-            Assert.Fail(ex.Message);
+            //Console.WriteLine(ex.ToString());
+            //Assert.Fail(ex.Message);
         }
     }
 }
