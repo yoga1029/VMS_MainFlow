@@ -855,6 +855,12 @@ public class AddBrand
     {
         try
         {
+        
+
+            // wait until overlay disappears
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(
+                By.CssSelector(".overlay")));
+
             Thread.Sleep(2000);
             //Locate Product Module
             IWebElement productModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Products')]")));
