@@ -843,6 +843,7 @@ public class AddBrand
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ITakesScreenshot screenshotDriver;
 
     public AddBrand(IWebDriver driver)
     {
@@ -909,6 +910,28 @@ public class AddBrand
         }
         catch (Exception ex)
         {
+            // Take screenshot
+            screenshotDriver = (ITakesScreenshot)driver;
+            Screenshot screenshot = screenshotDriver.GetScreenshot();
+
+            // Jenkins workspace / project root
+            string projectPath3 = Directory.GetCurrentDirectory();
+
+            // Create Screenshots folder
+            string screenshotDir3 = Path.Combine(projectPath3, "Screenshots");
+            Directory.CreateDirectory(screenshotDir3);
+
+            // FIX: remove invalid characters from filename
+            string filePath2 = Path.Combine(
+                screenshotDir3,
+                $"Screenshot_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png"
+            );
+
+            // Save screenshot
+            screenshot.SaveAsFile(filePath2);
+
+            Console.WriteLine($"Screenshot saved at: {filePath2}");
+
             Console.WriteLine(ex.ToString());
             Assert.Fail(ex.Message);
         }
