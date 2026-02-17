@@ -149,7 +149,7 @@ namespace VMS_MainFlow.Utilities.Datas
         {
             { //Four Functions
   
-                "Chengssddalore","issaSsdtreet to adttSdtreet"
+                "Chore","issreet to areet"
             },
 
         };
