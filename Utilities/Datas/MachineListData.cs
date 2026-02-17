@@ -149,7 +149,7 @@ namespace VMS_MainFlow.Utilities.Datas
         {
             { //Four Functions
   
-                "Banglore","thisStreet to thatStreet"
+                "Mangalore","isStreet to atStreet"
             },
 
         };
