@@ -1592,7 +1592,7 @@ public class Productmapping
             IWebElement endingColumnCount = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("(//input[@type='number'])[6]")));
             endingColumnCount.Clear();
             endingColumnCount.SendKeys(PlanogramData.slotCounts[0, 1]);
-            Thread.Sleep(1000);
+            Thread.Sleep(3000);
             IWebElement saveSlots = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(), ' Save ')]")));
             saveSlots.Click();
             Thread.Sleep(3000);
@@ -1757,7 +1757,7 @@ public class Productmapping
 
 
         }
-        catch
+        catch(Exception ex)
         {
             // Take screenshot
             screenshotDriver = (ITakesScreenshot)driver;
@@ -1780,7 +1780,7 @@ public class Productmapping
             screenshot.SaveAsFile(filePath2);
 
             Console.WriteLine($"Screenshot saved at: {filePath2}");
-            Assert.Fail();
+            Assert.Fail(ex.Message);
         }
     }
 
