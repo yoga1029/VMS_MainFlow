@@ -2313,12 +2313,31 @@ public class ReturnRequest
 
             //Warehouse Assigning to Return the products
             IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
-            warTransactionsButton.Click();
-            Thread.Sleep(3000);
+         
 
-            IWebElement returnRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions3")));
+            ((IJavaScriptExecutor)driver)
+                .ExecuteScript("arguments[0].click();", warTransactionsButton);
+
+            // Locate the submenu element (even if not visible yet)
+            IWebElement returnRequestMenu = wait.Until(
+                ExpectedConditions.ElementExists(
+                    By.Id("menuItem-W. Transactions3")
+                )
+            );
+
+            // Scroll that specific element into view
+            ((IJavaScriptExecutor)driver)
+                .ExecuteScript("arguments[0].scrollIntoView({block:'center'});", returnRequestMenu);
+
+            // Now click
+            wait.Until(ExpectedConditions.ElementToBeClickable(returnRequestMenu));
             returnRequestMenu.Click();
             Thread.Sleep(3000);
+
+
+            //IWebElement returnRequestMenu = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions3")));
+            //returnRequestMenu.Click();
+            //Thread.Sleep(3000);
 
             IWebElement searchTypeButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//mat-select[@role = 'listbox'])[2]")));
             searchTypeButton.Click();
