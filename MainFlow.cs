@@ -59,12 +59,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Login Flow");
+            test = extent.CreateTest("Login to the Portal");
 
             try
             {
                 new Login(driver).LoginFlow();
-                test.Pass("Login successful");
+                test.Pass("Successfully Logged in to the Portal");
             }
             catch (Exception ex)
             {
@@ -81,12 +81,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add Branch Flow");
+            test = extent.CreateTest("Entering in to Add Branch");
 
             try
             {
                 new AddBranch(driver).AddBranchFlow();
-                test.Pass("Branch completed");
+                test.Pass("Adding Branch completed");
             }
             catch (Exception ex)
             {
@@ -103,12 +103,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add Client Flow");
+            test = extent.CreateTest("Entering in to Add Client ");
 
             try
             {
                 new AddClient(driver).AddClientFlow();
-                test.Pass("Client completed");
+                test.Pass("Adding Client completed");
             }
             catch (Exception ex)
             {
@@ -400,6 +400,7 @@ namespace VMS_MainFlow   //same namespace
         public static void ClassCleanup()
         {
             extent.Flush();
+            Console.WriteLine("Flushing report...");
             driver.Quit();
         }
     }
