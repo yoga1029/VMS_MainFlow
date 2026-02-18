@@ -47,10 +47,8 @@ pipeline {
                 from: "${env.EMAIL_FROM}",
                 subject: "Cloud Flow Automation Report - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
                 mimeType: 'text/html',
-                body: """
-			Please find the test results and Extent Report attached.<br><br>
-			${SCRIPT, template="groovy-html.template"}
-		""",
+                body: 'Please find the test results and Extent Report attached.<br><br>' +
+      '${SCRIPT, template="groovy-html.template"}',
                 to: "${env.EMAIL_TO}",
 		attachmentsPattern: "**/Reports/*.html",
                 attachLog: false
