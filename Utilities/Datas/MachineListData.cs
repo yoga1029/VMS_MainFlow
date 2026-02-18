@@ -149,7 +149,7 @@ namespace VMS_MainFlow.Utilities.Datas
         {
             { //Four Functions
   
-                "Chowsdddgre","isfgfsreeet to asfdgreet"
+                "Cfsdgre","fsrefeet to asareet"
             },
 
         };
