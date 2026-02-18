@@ -18,9 +18,7 @@ namespace VMS_MainFlow
                 {
                     if (extent == null)
                     {
-                        string projectRoot = Directory
-                            .GetParent(AppDomain.CurrentDomain.BaseDirectory)
-                            .Parent.Parent.FullName;
+                        string projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\"));
 
                         string reportPath = Path.Combine(
                             projectRoot,
