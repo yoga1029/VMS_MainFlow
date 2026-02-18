@@ -33,12 +33,26 @@ pipeline {
             bat 'dir /s *.trx'
             mstest testResultsFile: '**/TestResults/*.trx'
 
+	 // ✅ Publish Extent Report in Jenkins UI
+            publishHTML([
+            reportDir: 'Reports',
+            reportFiles: '*.html',
+            reportName: 'Automation Test Report',
+            keepAll: true,
+            alwaysLinkToLastBuild: true,
+            allowMissing: true
+            ])
+
             emailext(
                 from: "${env.EMAIL_FROM}",
                 subject: "Cloud Flow Automation Report - Build #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
                 mimeType: 'text/html',
-                body: '${SCRIPT, template="groovy-html.template"}',
+                body: """
+			Please find the test results and Extent Report attached.<br><br>
+			${SCRIPT, template="groovy-html.template"}
+		""",
                 to: "${env.EMAIL_TO}",
+		attachmentsPattern: "**/Reports/*.html",
                 attachLog: false
             )
         }
