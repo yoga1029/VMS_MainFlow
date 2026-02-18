@@ -16,8 +16,10 @@ namespace VMS_MainFlow
         {
             if (extent == null)
             {
+                string projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+
                 string reportPath = Path.Combine(
-                    Directory.GetCurrentDirectory(),
+                    projectRoot,
                     "Reports",
                     "ExtentReport_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html");
 
