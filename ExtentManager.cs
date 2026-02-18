@@ -1,40 +1,44 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace VMS_MainFlow
 {
     public class ExtentManager
     {
         private static ExtentReports extent;
+        private static readonly object _lock = new object();
 
         public static ExtentReports GetInstance()
         {
             if (extent == null)
             {
-                string projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+                lock (_lock)
+                {
+                    if (extent == null)
+                    {
+                        string projectRoot = Directory
+                            .GetParent(AppDomain.CurrentDomain.BaseDirectory)
+                            .Parent.Parent.FullName;
 
-                string reportPath = Path.Combine(
-                    projectRoot,
-                    "Reports",
-                    "ExtentReport_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html");
+                        string reportPath = Path.Combine(
+                            projectRoot,
+                            "Reports",
+                            "ExtentReport_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html");
 
-                Directory.CreateDirectory(Path.GetDirectoryName(reportPath));
+                        Directory.CreateDirectory(Path.GetDirectoryName(reportPath));
 
-                var spark = new ExtentSparkReporter(reportPath);
+                        var htmlReporter = new ExtentSparkReporter(reportPath);
 
-                extent = new ExtentReports();
-                extent.AttachReporter(spark);
+                        htmlReporter.Config.DocumentTitle = "Automation Test Report";
+                        htmlReporter.Config.ReportName = "Workflow Test Report";
 
-                extent.AddSystemInfo("Environment", "QA");
-                extent.AddSystemInfo("Browser", "Chrome");
-                extent.AddSystemInfo("Execution", "Jenkins/Local");
+                        extent = new ExtentReports();
+                        extent.AttachReporter(htmlReporter);
+                    }
+                }
             }
-
             return extent;
         }
     }
