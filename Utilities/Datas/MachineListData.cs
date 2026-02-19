@@ -149,7 +149,7 @@ namespace VMS_MainFlow.Utilities.Datas
         {
             { //Four Functions
   
-                "Cfsdgdsare","fssdrefeet to asasreet"
+                "Cfe","fssd to reet"
             },
 
         };
