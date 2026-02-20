@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Linq.Expressions;
 using System.Reflection.PortableExecutable;
 using System.Threading;
+using VMS_MainFlow;
 using VMS_MainFlow.Utilities.Datas;
 using WindowsInput;
 using WindowsInput.Native;
@@ -1610,15 +1611,30 @@ public class Productmapping
             Thread.Sleep(3000);
             Console.WriteLine("Entered into Machine Details Page");
 
+            //IWebElement clientLocation = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("clientLocation")));
+            //clientLocation.Clear();
+            //clientLocation.SendKeys(machineInfoData.machineDetails[0, 0]);
+            //Thread.Sleep(2000);
+
+            //IWebElement routeIdentifier = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("routeIdentifier")));
+            //routeIdentifier.Clear();
+            //routeIdentifier.SendKeys(machineInfoData.machineDetails[0, 1]);
+            //Thread.Sleep(2000);
+
+
             IWebElement clientLocation = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("clientLocation")));
             clientLocation.Clear();
-            clientLocation.SendKeys(machineInfoData.machineDetails[0, 0]);
-            Thread.Sleep(2000);
+
+            string locationValue = machineInfoData.machineDetails[0, 0] + RandomHelper.GetRandomAlphabet();
+            clientLocation.SendKeys(locationValue);
 
             IWebElement routeIdentifier = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("routeIdentifier")));
             routeIdentifier.Clear();
-            routeIdentifier.SendKeys(machineInfoData.machineDetails[0, 1]);
-            Thread.Sleep(2000);
+
+            string routeValue = machineInfoData.machineDetails[0, 1] + RandomHelper.GetRandomAlphabet();
+            routeIdentifier.SendKeys(routeValue);
+
+
 
             // Direct Refill checkbox
             IWebElement directRefillCheckbox = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@name='directRefill']")));

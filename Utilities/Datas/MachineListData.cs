@@ -147,9 +147,9 @@ namespace VMS_MainFlow.Utilities.Datas
     {
         public static string[,] machineDetails = new string[,]
         {
-            { //Four Functions
+            { 
   
-                "Cfe","fssd to reet"
+                "Caafe","fsasd to areet"
             },
 
         };
