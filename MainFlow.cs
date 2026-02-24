@@ -2050,17 +2050,18 @@ public class RaiseRefillRequest
 
             IWebElement saveStatus = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveStatus.Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
             driver.Navigate().Back();
-            Thread.Sleep(2000);
+            Thread.Sleep(4000);
             Console.WriteLine("Status of the Machine is set to Down Planned");
+
 
             IWebElement machineFilter1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@name = 'searchText']")));
             machineFilter1.Click();
             machineFilter1.Clear();
             machineFilter1.SendKeys(MachineMapping.unmappedMachineForMapping /* "2VE0000223" */ + Keys.Enter);
-            Thread.Sleep(3000);
-
+            Thread.Sleep(5000);
+            Console.WriteLine("Machine is picked for raise refill");
 
             //Raising refill request
             IWebElement actionButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[10]")));
@@ -2176,6 +2177,7 @@ public class RaiseRefillRequest
                 Thread.Sleep(2000);
                 driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                 Thread.Sleep(4000);
+                Console.WriteLine("Refill Request Completed");
 
                 //Fetching Machine List
                 IWebElement machineMenu1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Machines")));
