@@ -2220,7 +2220,7 @@ public class RaiseRefillRequest
                 Thread.Sleep(2000);
             }
         }
-        catch
+        catch (Exception ex)
         {
             // Take screenshot
             screenshotDriver = (ITakesScreenshot)driver;
@@ -2243,7 +2243,8 @@ public class RaiseRefillRequest
             screenshot.SaveAsFile(filePath2);
 
             Console.WriteLine($"Screenshot saved at: {filePath2}");
-            Assert.Fail();
+            Console.WriteLine(ex.ToString());
+            Assert.Fail(ex.Message);
         }
         //catch (Exception ex)
         //{
