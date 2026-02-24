@@ -2182,11 +2182,11 @@ public class RaiseRefillRequest
                 //Fetching Machine List
                 IWebElement machineMenu1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Machines")));
                 machineMenu1.Click();
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
 
                 IWebElement machineList1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Machines0")));
                 machineList1.Click();
-                Thread.Sleep(2000);
+                Thread.Sleep(4000);
 
                 IWebElement machineFilter2 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@name = 'searchText']")));
                 machineFilter2.Click();
