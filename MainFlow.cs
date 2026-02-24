@@ -978,7 +978,7 @@ public class AddCategory
             //Locate Category sub-module
             IWebElement categorySubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Categories ')]")));
             categorySubModule.Click();
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
 
 
             for (int i = 0; i < AddCategoryData.Categories.GetLength(0); i++)
@@ -1067,7 +1067,7 @@ public class AddSubCategory
             //Locate Subategory sub-module
             IWebElement subCategory = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Sub Categories ')]")));
             subCategory.Click();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
 
 
             for (int i = 0; i < AddSubCategoryData.SubCategory.GetLength(0); i++)
