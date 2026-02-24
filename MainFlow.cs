@@ -991,7 +991,7 @@ public class AddCategory
 
                 // Check if category exists
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
-                Thread.Sleep(1000);
+                Thread.Sleep(3000);
                 if (rows.Count == 0)
                 {
                     Console.WriteLine($"Category '{searchName}' not found. Adding category");
