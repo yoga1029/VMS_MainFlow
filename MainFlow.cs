@@ -971,14 +971,14 @@ public class AddCategory
         try
         {
             Thread.Sleep(1000);
-            //Locate Product Module
-            IWebElement productModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Products')]")));
-            productModule.Click();
+            ////Locate Product Module
+            //IWebElement productModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Products')]")));
+            //productModule.Click();
 
             //Locate Category sub-module
             IWebElement categorySubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Categories ')]")));
             categorySubModule.Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(4000);
 
 
             for (int i = 0; i < AddCategoryData.Categories.GetLength(0); i++)
@@ -1058,15 +1058,15 @@ public class AddSubCategory
     {
         try
         {
-            Thread.Sleep(1000);
-            //Locate Product Module
-            IWebElement productModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Products')]")));
-            productModule.Click();
+            //Thread.Sleep(1000);
+            ////Locate Product Module
+            //IWebElement productModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Products')]")));
+            //productModule.Click();
 
             //Locate Subategory sub-module
             IWebElement subCategory = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Sub Categories ')]")));
             subCategory.Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(4000);
 
 
             for (int i = 0; i < AddSubCategoryData.SubCategory.GetLength(0); i++)
@@ -1160,9 +1160,9 @@ public class AddProduct
         try
         {
             Thread.Sleep(1000);
-            //Locate Product Module
-            IWebElement productModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Products')]")));
-            productModule.Click();
+            ////Locate Product Module
+            //IWebElement productModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Products')]")));
+            //productModule.Click();
 
             //Locate ProductList sub-module
             IWebElement productList = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Product List ')]")));
@@ -1447,9 +1447,9 @@ public class AddVendor
 
         try
         {
-            //Locate Warehouse Module
-            IWebElement warehouseModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Warehouse")));
-            warehouseModule.Click();
+            ////Locate Warehouse Module
+            //IWebElement warehouseModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Warehouse")));
+            //warehouseModule.Click();
 
             // Fetching Vendor List sub-menu
             IWebElement vendorList = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Warehouse1")));
