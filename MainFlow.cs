@@ -1551,6 +1551,7 @@ public class Productmapping
             IWebElement machineList = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Machines0")));
             machineList.Click();
             Thread.Sleep(1000);
+            Console.WriteLine("Entered into machine list page");
 
             string machineId = MachineMapping.unmappedMachineForMapping;
             Console.WriteLine("Selecting machine: " + machineId);
@@ -1558,7 +1559,8 @@ public class Productmapping
             IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
             searchText.Clear();
             searchText.SendKeys(machineId + Keys.Enter);
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
+            Console.WriteLine("Machine Found");
 
             // Action Button 
             IWebElement actionButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(".mat-focus-indicator.mat-menu-trigger.mat-icon-button.mat-button-base")));
@@ -1569,6 +1571,7 @@ public class Productmapping
             IWebElement machineDetails = wait.Until(ExpectedConditions.ElementToBeClickable(By.ClassName("mat-menu-item")));
             machineDetails.Click();
             Thread.Sleep(3000);
+            Console.WriteLine("Machine Details Opened");
 
             //Edit Planogram
             Thread.Sleep(3000);
