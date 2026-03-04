@@ -1,5 +1,6 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Model;
+using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -473,7 +474,8 @@ namespace VMS_MainFlow   //same namespace
                 IWebElement branchListSubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Branch List')]")));
                 branchListSubModule.Click();
                 Thread.Sleep(2000);
-                test.Info("Entered in to Branch ");
+                Console.WriteLine("Entered in to Branch");
+                test.Info("Entered in to Branch");
 
                 string searchName = AddBranchData.addBranchSuccess["searchName"];
                 IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
@@ -485,7 +487,8 @@ namespace VMS_MainFlow   //same namespace
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
                 if (rows.Count == 0)
                 {
-                    test.Info($"Brancch '{searchName}' not found. Adding Branch");
+                    test.Info($"The Branch '{searchName}' not found. Adding Branch");
+                    Console.WriteLine($"The Branch '{searchName}' not found. Adding Branch");
 
                     // Navigate to add branch page
                     IWebElement addBranchButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -551,7 +554,8 @@ namespace VMS_MainFlow   //same namespace
                 }
                 else
                 {
-                    test.Info($"Branch '{searchName}' found.");
+                    Console.WriteLine($"The Branch '{searchName}' is already found.");
+                    test.Info($"The Branch '{searchName}'is already found.");
                 }
             }
             catch (Exception ex)
@@ -640,8 +644,8 @@ public class AddClient
                 }
                 else
                 {
-                    Console.WriteLine($"Client '{searchName}' not found. Adding Client");
-                    test.Info($"Client '{searchName}' not found. Adding Client");
+                    Console.WriteLine($"The Client '{searchName}' is already found.");
+                    test.Info($"The Client '{searchName}' is already found.");
                 }
             }
         }
@@ -688,9 +692,12 @@ public class MachineMapping
             machineList.Click();
             Thread.Sleep(6000);
 
+            test.Info("Started mapping the machine with client");
+            Console.WriteLine("Started mapping the machine with client");
             // Get all rows 
             var machineRows = wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("table tbody tr"))).ToList();
             Console.WriteLine("Total Machines Found: " + machineRows.Count);
+            test.Info("Total Machines Found: " + machineRows.Count);
 
             //store unmapped machines
             List<IWebElement> unmappedMachines = new List<IWebElement>();
@@ -704,20 +711,25 @@ public class MachineMapping
                     unmappedMachines.Add(row);
                 }
             }
+
+            test.Info("Unmapped Machines Count: " + unmappedMachines.Count);
             Console.WriteLine("Unmapped Machines Count: " + unmappedMachines.Count);
             if (unmappedMachines.Count > 0)
             {
                 var firstUnmappedRow = unmappedMachines.First();
                 string firstUnmappedMachineId = firstUnmappedRow.FindElements(By.TagName("td"))[0].Text;
                 Console.WriteLine("First Unmapped Machine Id: " + firstUnmappedMachineId);
-
+                test.Info("First Unmapped Machine Id: " + firstUnmappedMachineId);
                 // Store for further mapping
                 unmappedMachineForMapping = firstUnmappedMachineId;
             }
             else
             {
                 Console.WriteLine("No unmapped machines found.");
+                test.Info("No unmapped machines found.");
             }
+
+            test.Info("Entered in to Purchase Order");
             // Navigate to Purchase Order menu
             IWebElement purchaseOrderButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Purchase Order')]")));
             purchaseOrderButton.Click();
@@ -817,13 +829,15 @@ public class MachineMapping
 
             // Compare stored unmapped machine with each dropdown option
             bool found = false;
+            string optionTexts = "";
             for (int i = 0; i < machineOptions.Count; i++)
             {
-                string optionTexts = machineOptions[i].Text.Trim();
+                optionTexts = machineOptions[i].Text.Trim();
                 if (optionTexts.Equals(unmappedMachineForMapping, StringComparison.OrdinalIgnoreCase))
                 {
                     machineOptions[i].Click();
                     Console.WriteLine("Mapped machine is: " + optionTexts);
+                    test.Info("Mapped machine is: " + optionTexts);
                     found = true;
                     break;
                 }
@@ -832,6 +846,7 @@ public class MachineMapping
             if (!found)
             {
                 Console.WriteLine("Stored unmapped machine not found in dropdown!");
+                test.Info("Stored unmapped machine not found in dropdown!");
             }
 
 
@@ -847,6 +862,8 @@ public class MachineMapping
             IWebElement save = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[.//span[normalize-space(text())='Save']]")));
             save.Click();
             Thread.Sleep(3000);
+            Console.WriteLine($"The Client '{clientName1}' is mapped with " + optionTexts);
+            test.Info($"The Client '{clientName1}' is mapped with " + optionTexts);
 
         }
 
@@ -914,7 +931,7 @@ public class AddBrand
                 if (rows.Count == 0)
                 {
                     Console.WriteLine($"Brand '{searchName}' not found. Adding brand");
-
+                    test.Info($"Brand '{searchName}' not found. Adding brand");
                     // Click Add button
                     IWebElement addBrandButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
                     addBrandButton.Click();
@@ -940,6 +957,7 @@ public class AddBrand
                 else
                 {
                     Console.WriteLine($"Brand '{searchName}' already exists.");
+                    test.Info($"Brand '{searchName}' already exists.");
                 }
             }
         }
@@ -1025,6 +1043,7 @@ public class AddCategory
                 if (rows.Count == 0)
                 {
                     Console.WriteLine($"Category '{searchName}' not found. Adding category");
+                    test.Info($"Category '{searchName}' not found. Adding category");
 
 
                     // Navigate to add catgeory page
@@ -1058,6 +1077,7 @@ public class AddCategory
                 else
                 {
                     Console.WriteLine($"Category '{searchName}' already exists.");
+                    test.Info($"Category '{searchName}' already exists.");
                 }
             }
         }
@@ -1113,7 +1133,7 @@ public class AddSubCategory
                 if (rows.Count == 0)
                 {
                     Console.WriteLine($"Subcategory '{searchName}' not found. Adding Subcategory");
-
+                    test.Info($"Subcategory '{searchName}' not found. Adding Subcategory");
 
                     // Navigate to add subcatgeory page
                     IWebElement addSubCategoryButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -1158,6 +1178,7 @@ public class AddSubCategory
                 else
                 {
                     Console.WriteLine($"Subcategory '{searchName}' already exists.");
+                    test.Info($"Subcategory '{searchName}' already exists.");
                 }
             }
         }
@@ -1227,6 +1248,7 @@ public class AddProduct
                 if (rows.Count == 0)
                 {
                     Console.WriteLine($"Product '{searchName}' not found. Adding Product");
+                    test.Info($"Product '{searchName}' not found. Adding Product");
 
                     // Navigate to add product page
                     IWebElement addProductButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -1331,6 +1353,7 @@ public class AddProduct
                 else
                 {
                     Console.WriteLine($"Product '{searchName}' already exists.");
+                    test.Info($"Product '{searchName}' already exists.");
                 }
             }
         }
@@ -1397,6 +1420,7 @@ public class AddWarehouse
                 if (rowData.Count == 0)
                 {
                     Console.WriteLine($"Warehouse '{searchName}' not found. Adding Warehouse");
+                    test.Info($"Warehouse '{searchName}' not found. Adding Warehouse");
 
                     // Navigate to add warehouse page
                     IWebElement addWarehouseButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -1453,6 +1477,7 @@ public class AddWarehouse
                 else
                 {
                     Console.WriteLine($"Warehouse '{searchName}' already exists.");
+                    test.Info($"Warehouse '{searchName}' already exists.");
                 }
 
             }
@@ -1517,7 +1542,8 @@ public class AddVendor
                 var rowData = driver.FindElements(By.XPath("//table//tbody/tr"));    //fetching table data
                 if (rowData.Count == 0)
                 {
-                    Console.WriteLine($"Warehouse '{searchName}' not found. Adding Warehouse");
+                    Console.WriteLine($"Vendor '{searchName}' not found. Adding Vendor");
+                    test.Info($"Vendor '{searchName}' not found. Adding Vendor");
 
                     // Navigate to add warehouse page
                     IWebElement addVendorButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -1552,6 +1578,7 @@ public class AddVendor
                 else
                 {
                     Console.WriteLine($"Vendor '{searchName}' already exists.");
+                    test.Info($"Vendor '{searchName}' already exists.");
                 }
             }
         }
@@ -1597,9 +1624,11 @@ public class Productmapping
             machineList.Click();
             Thread.Sleep(1000);
             Console.WriteLine("Entered into machine list page");
+            test.Info("Entered into machine list page");
 
             string machineId = MachineMapping.unmappedMachineForMapping;
             Console.WriteLine("Selecting machine: " + machineId);
+            test.Info("Selected machine: " + machineId);
 
             IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
             searchText.Clear();
@@ -1618,6 +1647,7 @@ public class Productmapping
             Thread.Sleep(3000);
             Console.WriteLine("Machine Details Opened");
 
+            test.Info("Editing the Planogram..");
             //Edit Planogram
             IWebElement editSlot = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[@mattooltip='Edit Slot']")));
             editSlot.Click();
@@ -1647,12 +1677,15 @@ public class Productmapping
             saveSlots.Click();
             Thread.Sleep(5000);
             Console.WriteLine("Product Matrix Changed");
+            test.Info("Planogram Matrix Changed");
 
             ///* wait for Angular overlay/backdrop to disappear */
             //wait.Until(ExpectedConditions.InvisibilityOfElementLocated(
             //    By.ClassName("cdk-overlay-backdrop")));
 
 
+            Console.WriteLine("Modifying the machine details");
+            test.Info("Modifying the machine details");
             IWebElement editInfo = wait.Until(
                 ExpectedConditions.ElementIsVisible(By.XPath("//button[@mattooltip='Edit Info']")));
             editInfo.Click();
@@ -1675,21 +1708,24 @@ public class Productmapping
 
             string locationValue = machineInfoData.machineDetails[0, 0] + RandomHelper.GetRandomAlphabet();
             clientLocation.SendKeys(locationValue);
+            test.Info($"Client Location is modified as: '{locationValue}'");
 
             IWebElement routeIdentifier = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("routeIdentifier")));
             routeIdentifier.Clear();
 
             string routeValue = machineInfoData.machineDetails[0, 1] + RandomHelper.GetRandomAlphabet();
             routeIdentifier.SendKeys(routeValue);
+            test.Info($"Route is modified as: '{routeValue}'");
 
 
-
+            test.Info("Checking the status of Direct Refill");
             // Direct Refill checkbox
             IWebElement directRefillCheckbox = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@name='directRefill']")));
 
             if (directRefillCheckbox.Selected)
             {
                 Console.WriteLine("Direct Refill is checked. Unchecking now..");
+                test.Info("Direct Refill is checked. Unchecking now..");
                 IWebElement directRefillLabel = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'Direct Refill Option')]")));
                 directRefillLabel.Click();
                 Thread.Sleep(1000); // allow Auto Refill to enable
@@ -1697,6 +1733,7 @@ public class Productmapping
             else
             {
                 Console.WriteLine("Direct Refill is already unchecked. Moving to check the status of Auto Refill...");
+                test.Info("Direct Refill is already unchecked. Moving to check the status of Auto Refill...");
             }
 
             // Auto Refill checkbox
@@ -1705,6 +1742,7 @@ public class Productmapping
             if (autoRefillCheckbox.Selected)
             {
                 Console.WriteLine("Disable Auto Refill is checked. Unchecking now..");
+                test.Info("Disable Auto Refill is checked. Unchecking now..");
                 IWebElement autoRefillLabel = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'Disable Auto Refill')]")));
                 autoRefillLabel.Click();
                 Thread.Sleep(1000);
@@ -1712,6 +1750,7 @@ public class Productmapping
             else
             {
                 Console.WriteLine("Disable Auto Refill is already unchecked. Saving..");
+                test.Info("Disable Auto Refill is already unchecked. Saving..");
             }
             Thread.Sleep(2000);
 
@@ -1724,6 +1763,7 @@ public class Productmapping
 
             //// Edit Single Slot 
             Console.WriteLine("Product Mapping in to slots...");
+            test.Info("Started Mapping in to slots...");
             Thread.Sleep(3000);
             Actions a = new Actions(driver);
 
@@ -1790,6 +1830,8 @@ public class Productmapping
 
                 IWebElement save = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(), ' Save ')]")));
                 save.Click();
+                Console.WriteLine($"Product '{ProductMappingData.products[i, 1]}' successfully mapped into the slot");
+                test.Info($"Product '{ProductMappingData.products[i, 1]}' successfully mapped into the slot");
             }
 
             //Modify Planogram after Product Mapping
@@ -1818,6 +1860,7 @@ public class Productmapping
             IWebElement saveSlots1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(), ' Save ')]")));
             saveSlots1.Click();
             Console.WriteLine("Product Matrix Changed again");
+            test.Info("Product Matrix Changed again");
             Thread.Sleep(2000);
 
 
