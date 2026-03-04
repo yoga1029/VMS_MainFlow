@@ -1860,7 +1860,7 @@ public class Productmapping
             IWebElement saveSlots1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(), ' Save ')]")));
             saveSlots1.Click();
             Console.WriteLine("Product Matrix Changed again");
-            test.Info("Product Matrix Changed again");
+            test.Info("Product Matrix Changed again and exited from the page");
             Thread.Sleep(2000);
 
 
@@ -1957,7 +1957,7 @@ public class AddPurchase
         purchaseMenu.Click();
         Thread.Sleep(2000);
 
-
+        test.Info("Started Purchasing the mapped products");
         IWebElement AddWarehousePurchase = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains (@mattooltip, 'Add Warehouse Purchase')]")));
         AddWarehousePurchase.Click();
         Thread.Sleep(1000);
@@ -1965,6 +1965,7 @@ public class AddPurchase
         string warehouseName = AddPurchaseData.Purchases[0, 0];
         string dynamicWarehouseXPath = $"//span[text()=' {warehouseName} ']";
         driver.FindElement(By.XPath(dynamicWarehouseXPath)).Click();
+        test.Info($"The Warehouse'{dynamicWarehouseXPath}' selected for purchasing the products");
 
         try
         {
@@ -2004,16 +2005,17 @@ public class AddPurchase
 
 
                 // Add Purchase Page
-
                 driver.FindElement(By.Name("vendor")).Click();
                 string vendorName = AddPurchaseData.Purchases[i, 1];
                 string dynamicVendorXPath = $"//span[text()=' {vendorName} ']";
                 driver.FindElement(By.XPath(dynamicVendorXPath)).Click();
+                test.Info($"The Vendor '{dynamicVendorXPath}' selected for purchasing the products");
 
                 driver.FindElement(By.Name("productId")).Click();
                 string productName = AddPurchaseData.Purchases[i, 2];
                 string dynamicProductXPath = $"//span[contains(text(), ' {productName} ')]";
                 driver.FindElement(By.XPath(dynamicProductXPath)).Click();
+                test.Info($"The product added to purchase is : '{dynamicVendorXPath}' ");
 
                 wait.Until(ExpectedConditions.ElementIsVisible(By.Name("qty"))).SendKeys(AddPurchaseData.Purchases[i, 3]);
 
@@ -2072,6 +2074,7 @@ public class AddPurchase
             IWebElement saveButton1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveButton1.Click();
             Thread.Sleep(2000);
+            test.Info("All Mapped Products are Purchased.");
         }
         catch (Exception ex)
         {
@@ -2151,6 +2154,7 @@ public class RaiseRefillRequest
             driver.Navigate().Back();
             Thread.Sleep(4000);
             Console.WriteLine("Status of the Machine is set to Down Planned");
+            test.Info("Status of the Machine is set to Down Planned");
 
 
             IWebElement machineFilter1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@name = 'searchText']")));
@@ -2159,6 +2163,7 @@ public class RaiseRefillRequest
             machineFilter1.SendKeys(MachineMapping.unmappedMachineForMapping /* "2VE0000223" */ + Keys.Enter);
             Thread.Sleep(5000);
             Console.WriteLine("Machine is picked for raise refill");
+            test.Info($"Machine picked for raising refill request is '{MachineMapping.unmappedMachineForMapping}'");
 
             //Raising refill request
             IWebElement actionButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[10]")));
@@ -2173,6 +2178,7 @@ public class RaiseRefillRequest
             saveRequest.Click();
             Thread.Sleep(3000);
             Console.WriteLine("Refill Request Created");
+            test.Info($"Refill Request Created for Machine ID: '{MachineMapping.unmappedMachineForMapping}'");
 
             ////Warehouse Assigning
             //IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
@@ -2225,6 +2231,8 @@ public class RaiseRefillRequest
             IWebElement saveWarehouse = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveWarehouse.Click();
             Thread.Sleep(3000);
+            test.Info($"Warehouse assigned for refilling the Machine : '{MachineMapping.unmappedMachineForMapping}'");
+
 
             //Stock Selection
             IWebElement actionButton2 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[13]")));
@@ -2268,13 +2276,15 @@ public class RaiseRefillRequest
                 IWebElement completeRefill = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(text(),' Complete Refill ')]")));
                 completeRefill.Click();
                 Thread.Sleep(2000);
+                test.Info($"Refill Request Accepted for the Machine : '{MachineMapping.unmappedMachineForMapping}'");
 
                 IWebElement checkAllButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[normalize-space()='Check All']")));
                 checkAllButton.Click();
                 Thread.Sleep(2000);
                 driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                 Thread.Sleep(4000);
-                Console.WriteLine("Refill Request Completed");
+                test.Info($"Refill Request Completed for the Machine : '{MachineMapping.unmappedMachineForMapping}'");
+
 
                 //Fetching Machine List
                 IWebElement machineMenu1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Machines")));
@@ -2304,6 +2314,7 @@ public class RaiseRefillRequest
 
                 //Operation Status
                 Console.WriteLine("Setting the Status of the Machine to ONLINE");
+              
                 IWebElement selectStatus1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'Operation Status')]/following::a[1]")));
                 selectStatus1.Click();
                 Thread.Sleep(1000);
@@ -2317,6 +2328,7 @@ public class RaiseRefillRequest
                 IWebElement saveStatus1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
                 saveStatus1.Click();
                 Thread.Sleep(2000);
+                test.Info("Status of the Machine is set to ONLINE");
             }
         }
         catch (Exception ex)
@@ -2375,6 +2387,10 @@ public class ReturnRequest
         try
         {
             Thread.Sleep(2000);
+            //Fill the input fields
+            string machineId = /*"2VE0000224"*/ MachineMapping.unmappedMachineForMapping;
+            Console.WriteLine("Selected machine for returning products: " + machineId);
+            test.Info("Machine selected for return its products is : " + machineId);
 
             // Machines → Requests → Return
             //Fetching Machine List
@@ -2392,9 +2408,10 @@ public class ReturnRequest
             AddReturnRequest.Click();
             Thread.Sleep(2000);
 
-            //Fill the input fields
-            string machineId = /*"2VE0000224"*/ MachineMapping.unmappedMachineForMapping;
-            Console.WriteLine("Selected machine for returning products: " + machineId);
+            ////Fill the input fields
+            //string machineId = /*"2VE0000224"*/ MachineMapping.unmappedMachineForMapping;
+            //Console.WriteLine("Selected machine for returning products: " + machineId);
+            //test.Info("Machine selected for return its products is : " + machineId);
 
             // 1. Click the dropdown
             IWebElement machineDropdown = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("machineIds")));
@@ -2425,11 +2442,12 @@ public class ReturnRequest
                 Console.WriteLine("Machine ID NOT FOUND in dropdown! → " + machineId);
             }
             Thread.Sleep(1000);
-            IWebElement checkAllButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[normalize-space()='Check All']")));
-            checkAllButton.Click();
+            IWebElement save = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[normalize-space()='Check All']")));
+            save.Click();
             driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
             Thread.Sleep(3000);
 
+            test.Info("Return Request Created for Machine ID: " + machineId);
             //Warehouse Assigning to Return the products
             IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
          
@@ -2488,6 +2506,7 @@ public class ReturnRequest
             IWebElement saveWarehouse = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveWarehouse.Click();
             Thread.Sleep(3000);
+            test.Info($" {chooseWarehouse} Assigned and Return Request Accepted for Machine ID: " + machineId);
 
             IWebElement actionButton1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[11]")));
             actionButton1.Click();
@@ -2513,7 +2532,7 @@ public class ReturnRequest
             checkAllButton1.Click();
             driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
             Thread.Sleep(4000);
-
+            test.Info("Returning the products is completed.");
 
             //SETTING LOCATION AND PARAMETERS 
             //Fetching Machine menu
@@ -2564,6 +2583,7 @@ public class ReturnRequest
             saveLocation.Click();
             Console.WriteLine("Machine's Location Updated");
             Thread.Sleep(4000);
+            test.Info("Location of the Machine is Updated.");
 
 
             //SET PARAMETERS
@@ -2631,10 +2651,12 @@ public class ReturnRequest
                 closePopup.Click();
                 Thread.Sleep(1000);
                 Console.WriteLine("All missing parameters added & enabled successfully");
+                test.Info("All missing parameters added & enabled successfully");
             }
             else
             {
                 Console.WriteLine("All parameters already exist. Nothing to add.");
+                test.Info("All parameters already exist. Nothing to add.");
                 IWebElement closeNow = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//mat-icon[text()='clear']")));
                 closeNow.Click();
                 Thread.Sleep(800);
@@ -2642,7 +2664,7 @@ public class ReturnRequest
             }
             Thread.Sleep(3000);
 
-            Console.WriteLine("Parameter and Location are Updated. Moving to Add Functions of the Machine...");
+            //Console.WriteLine("Parameter and Location are Updated. Moving to Add Functions of the Machine...");
             //MachineFunctions machineFunction = new MachineFunctions(driver);
             //machineFunction.MachineFunctionsFlow();
         }
@@ -2699,10 +2721,11 @@ public class MachineScrapping
             IWebElement selectMachineId = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(normalize-space(),'Machine Id')]")));
             selectMachineId.Click();
             Thread.Sleep(2000);
-
+            test.Info($"");
             string machineId = /*"2VE0000220" */ MachineMapping.unmappedMachineForMapping;
             Console.WriteLine("Selecting machine: " + machineId);
 
+            test.Info("Machine Id that is going to Scrap is :" + machineId);
             IWebElement searchMachine = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@name = 'searchText']")));
             searchMachine.Clear();
             searchMachine.SendKeys(/*MachineMapping.unmappedMachineForMapping */ machineId + Keys.Enter);
@@ -2720,7 +2743,9 @@ public class MachineScrapping
             comfirmScrapping.Click();
             Thread.Sleep(2000);
 
-            Console.WriteLine("The Machine is Scrapped: " + machineId);
+            Console.WriteLine("The Machine Scrapped is: " + machineId);
+
+            test.Info("The Machine Scrapped is: " + machineId);
         }
         catch (Exception ex)
         {
