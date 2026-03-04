@@ -64,7 +64,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new Login(driver).LoginFlow();
+                new Login(driver, test).LoginFlow();
                 test.Pass("Successfully Logged in to the Portal");
             }
             catch (Exception ex)
@@ -415,11 +415,13 @@ namespace VMS_MainFlow   //same namespace
     {
         private IWebDriver driver;
         private WebDriverWait wait;
+        private ExtentTest test;
 
 
-        public Login(IWebDriver driver)
+        public Login(IWebDriver driver, ExtentTest test)
         {
             this.driver = driver;
+            this.test = test;
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
         }
 
@@ -428,14 +430,17 @@ namespace VMS_MainFlow   //same namespace
             //login to portal
             IWebElement login = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("username")));
             login.SendKeys(LoginData.loginSuccess["username"]);
+            test.Info("Username Entered");
 
             IWebElement password = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("password")));
             password.SendKeys(LoginData.loginSuccess["password"]);
+            test.Info("Password Entered");
 
             IWebElement loginButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector("button.mat-raised-button")));
             loginButton.Click();
+            test.Info("Login Button Clicked");
             Thread.Sleep(2000);
-            Console.WriteLine("Login Successfull");
+            test.Info("Login Successfull");
         }
 
     }
