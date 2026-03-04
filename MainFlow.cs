@@ -86,7 +86,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddBranch(driver).AddBranchFlow();
+                new AddBranch(driver, test).AddBranchFlow();
                 test.Pass("Adding Branch completed");
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddClient(driver).AddClientFlow();
+                new AddClient(driver, test).AddClientFlow();
                 test.Pass("Adding Client completed");
             }
             catch (Exception ex)
@@ -130,7 +130,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new MachineMapping(driver).ClientMappingWithMachineFlow();
+                new MachineMapping(driver, test).ClientMappingWithMachineFlow();
                 test.Pass("Machine mapping completed");
             }
             catch (Exception ex)
@@ -152,7 +152,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddBrand(driver).AddBrandFlow();
+                new AddBrand(driver, test).AddBrandFlow();
                 test.Pass("Brand completed");
             }
             catch (Exception ex)
@@ -174,7 +174,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddCategory(driver).AddCategoryFlow();
+                new AddCategory(driver, test).AddCategoryFlow();
                 test.Pass("Category completed");
             }
             catch (Exception ex)
@@ -198,7 +198,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddSubCategory(driver).AddSubCategoryFlow();
+                new AddSubCategory(driver, test).AddSubCategoryFlow();
                 test.Pass("SubCategory completed");
             }
             catch (Exception ex)
@@ -221,7 +221,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddProduct(driver).AddProductFlow();
+                new AddProduct(driver, test).AddProductFlow();
                 test.Pass("Product completed");
             }
             catch (Exception ex)
@@ -243,7 +243,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddWarehouse(driver).AddWarehouseFlow();
+                new AddWarehouse(driver, test).AddWarehouseFlow();
                 test.Pass("Warehouse completed");
             }
             catch (Exception ex)
@@ -265,7 +265,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddVendor(driver).AddVendorFlow();
+                new AddVendor(driver, test).AddVendorFlow();
                 test.Pass("Vendor completed");
             }
             catch (Exception ex)
@@ -289,7 +289,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new Productmapping(driver).ProductMappingFlow();
+                new Productmapping(driver, test).ProductMappingFlow();
                 test.Pass("Product Mapping completed");
             }
             catch (Exception ex)
@@ -312,7 +312,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new AddPurchase(driver).AddPurchaseFlow();
+                new AddPurchase(driver, test).AddPurchaseFlow();
                 test.Pass("Purchase completed");
             }
             catch (Exception ex)
@@ -337,7 +337,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new RaiseRefillRequest(driver).RaiseRefillRequestFlow();
+                new RaiseRefillRequest(driver, test).RaiseRefillRequestFlow();
                 test.Pass("Refill Request completed");
             }
             catch (Exception ex)
@@ -361,7 +361,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new ReturnRequest(driver).ReturnRequestFlow();
+                new ReturnRequest(driver, test).ReturnRequestFlow();
                 test.Pass("Return Request completed");
             }
             catch (Exception ex)
@@ -385,7 +385,7 @@ namespace VMS_MainFlow   //same namespace
 
             try
             {
-                new MachineScrapping(driver).MachineScrappingFlow();
+                new MachineScrapping(driver, test).MachineScrappingFlow();
                 test.Pass("Machine scrapping completed");
             }
             catch (Exception ex)
@@ -440,7 +440,6 @@ namespace VMS_MainFlow   //same namespace
             loginButton.Click();
             test.Info("Login Button Clicked");
             Thread.Sleep(2000);
-            test.Info("Login Successfull");
         }
 
     }
@@ -450,10 +449,13 @@ namespace VMS_MainFlow   //same namespace
     {
         private IWebDriver driver;
         private WebDriverWait wait;
+        private ExtentTest test;
 
-        public AddBranch(IWebDriver driver)
+        public AddBranch(IWebDriver driver, ExtentTest test)
         {
             this.driver = driver;
+            this.test = test;
+            this.test = test;
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
         }
 
@@ -471,7 +473,7 @@ namespace VMS_MainFlow   //same namespace
                 IWebElement branchListSubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Branch List')]")));
                 branchListSubModule.Click();
                 Thread.Sleep(2000);
-                Console.WriteLine("Entered in to Branch ");
+                test.Info("Entered in to Branch ");
 
                 string searchName = AddBranchData.addBranchSuccess["searchName"];
                 IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
@@ -483,7 +485,7 @@ namespace VMS_MainFlow   //same namespace
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
                 if (rows.Count == 0)
                 {
-                    Console.WriteLine($"Branch '{searchName}' not found. Adding Branch");
+                    test.Info($"Brancch '{searchName}' not found. Adding Branch");
 
                     // Navigate to add branch page
                     IWebElement addBranchButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -547,6 +549,10 @@ namespace VMS_MainFlow   //same namespace
 
 
                 }
+                else
+                {
+                    test.Info($"Branch '{searchName}' found.");
+                }
             }
             catch (Exception ex)
             {
@@ -565,10 +571,12 @@ public class AddClient
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ExtentTest test;
 
-    public AddClient(IWebDriver driver)
+    public AddClient(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -585,7 +593,9 @@ public class AddClient
             IWebElement clientButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Company1")));
             clientButton.Click();
             Thread.Sleep(2000);
-            Console.WriteLine("Entered in to Client ");
+            Console.WriteLine("Entered in to Client");
+            test.Info("Entered in to Client");
+
             for (int i = 0; i < AddClientData.Clients.GetLength(0); i++)
             {
                 string searchName = AddClientData.Clients[i, 0];
@@ -599,6 +609,7 @@ public class AddClient
                 if (rows.Count == 0)
                 {
                     Console.WriteLine($"Client '{searchName}' not found. Adding Client");
+                    test.Info($"Client '{searchName}' not found. Adding Client");
 
                     // Navigate to add client page
                     IWebElement addClientButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -627,6 +638,11 @@ public class AddClient
                     Thread.Sleep(2000);
 
                 }
+                else
+                {
+                    Console.WriteLine($"Client '{searchName}' not found. Adding Client");
+                    test.Info($"Client '{searchName}' not found. Adding Client");
+                }
             }
         }
         catch (Exception ex)
@@ -648,10 +664,13 @@ public class MachineMapping
     private IWebDriver driver;
     private WebDriverWait wait;
     public static string unmappedMachineForMapping;
+    private ExtentTest test;
 
-    public MachineMapping(IWebDriver driver)
+    public MachineMapping(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -851,10 +870,13 @@ public class AddBrand
     private IWebDriver driver;
     private WebDriverWait wait;
     private ITakesScreenshot screenshotDriver;
+    private ExtentTest test;
 
-    public AddBrand(IWebDriver driver)
+    public AddBrand(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -963,10 +985,13 @@ public class AddCategory
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ExtentTest test;
 
-    public AddCategory(IWebDriver driver)
+    public AddCategory(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -1052,10 +1077,13 @@ public class AddSubCategory
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ExtentTest test;
 
-    public AddSubCategory(IWebDriver driver)
+    public AddSubCategory(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -1152,10 +1180,13 @@ public class AddProduct
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ExtentTest test;
 
-    public AddProduct(IWebDriver driver)
+    public AddProduct(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -1321,10 +1352,13 @@ public class AddWarehouse
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ExtentTest test;
 
-    public AddWarehouse(IWebDriver driver)
+    public AddWarehouse(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
     }
 
@@ -1440,10 +1474,13 @@ public class AddVendor
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ExtentTest test;
 
-    public AddVendor(IWebDriver driver)
+    public AddVendor(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
     }
 
@@ -1537,10 +1574,13 @@ public class Productmapping
     private IWebDriver driver;
     private WebDriverWait wait;
     static ITakesScreenshot screenshotDriver;
+    private ExtentTest test;
 
-    public Productmapping(IWebDriver driver)
+    public Productmapping(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
     }
 
@@ -1851,10 +1891,13 @@ public class AddPurchase
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ExtentTest test;
 
-    public AddPurchase(IWebDriver driver)
+    public AddPurchase(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
     }
 
@@ -2007,10 +2050,13 @@ public class RaiseRefillRequest
     private IWebDriver driver;
     private WebDriverWait wait;
     private ITakesScreenshot screenshotDriver;
+    private ExtentTest test;
 
-    public RaiseRefillRequest(IWebDriver driver)
+    public RaiseRefillRequest(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -2272,10 +2318,12 @@ public class ReturnRequest
 {
     private IWebDriver driver;
     private WebDriverWait wait;
-
-    public ReturnRequest(IWebDriver driver)
+    private ExtentTest test;
+    public ReturnRequest(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -2574,10 +2622,13 @@ public class MachineScrapping
 {
     private IWebDriver driver;
     private WebDriverWait wait;
+    private ExtentTest test;
 
-    public MachineScrapping(IWebDriver driver)
+    public MachineScrapping(IWebDriver driver, ExtentTest test)
     {
         this.driver = driver;
+        this.test = test;
+        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
