@@ -659,8 +659,8 @@ public class AddClient
                 }
                 else
                 {
-                    Console.WriteLine($"The Client '{searchName}' is already exists. Skipping client creation..");
-                    test.Info($"The Client '{searchName}' is already exists. Skipping client creation..");
+                    Console.WriteLine($"The Client '{searchName}' already exists. Skipping client creation..");
+                    test.Info($"The Client '{searchName}' already exists. Skipping client creation..");
                 }
             }
         }
@@ -852,7 +852,7 @@ public class MachineMapping
                 {
                     machineOptions[i].Click();
                     Console.WriteLine("Mapped machine is: " + optionTexts);
-                    test.Info($"Machine with ID: '{optionTexts}' selected for mapping.");
+                    test.Info($"Machine with ID '{optionTexts}' is selected for mapping.");
                     found = true;
                     break;
                 }
@@ -878,7 +878,7 @@ public class MachineMapping
             save.Click();
             Thread.Sleep(3000);
             Console.WriteLine($"The Client '{clientName1}' is mapped with " + optionTexts);
-            test.Info($" Client '{clientName1}' successfully mapped to machine ID " + optionTexts);
+            test.Info($" Client '{clientName1}' successfully mapped to machine " + optionTexts);
         }
 
         catch (Exception ex)
@@ -2121,7 +2121,6 @@ public class AddPurchase
             IWebElement saveButton1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveButton1.Click();
             Thread.Sleep(2000);
-            test.Info("Purchase process completed successfully.");
         }
         catch (Exception ex)
         {
@@ -2279,7 +2278,7 @@ public class RaiseRefillRequest
             IWebElement saveWarehouse = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveWarehouse.Click();
             Thread.Sleep(3000);
-            test.Info($" {chooseWarehouse} assigned for refilling the stock for the machine with ID : '{MachineMapping.unmappedMachineForMapping}'");
+            test.Info($" {chooseWarehouse} assigned for refilling the stock for the machine with ID  '{MachineMapping.unmappedMachineForMapping}'");
 
 
             //Stock Selection
@@ -2331,7 +2330,7 @@ public class RaiseRefillRequest
                 Thread.Sleep(2000);
                 driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                 Thread.Sleep(4000);
-                test.Info($"Refill request process completed successfully for the Machine : '{MachineMapping.unmappedMachineForMapping}'");
+                test.Info($"Refill request process completed successfully for the Machine '{MachineMapping.unmappedMachineForMapping}'");
 
 
                 //Fetching Machine List
@@ -2772,7 +2771,6 @@ public class MachineScrapping
             IWebElement selectMachineId = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(normalize-space(),'Machine Id')]")));
             selectMachineId.Click();
             Thread.Sleep(2000);
-            test.Info($"");
             string machineId = /*"2VE0000220" */ MachineMapping.unmappedMachineForMapping;
             Console.WriteLine("Selecting machine: " + machineId);
 
