@@ -90,12 +90,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Adding Branch");
+            test = extent.CreateTest("Branch Creation");
 
             try
             {
                 new AddBranch(driver, test).AddBranchFlow();
-                test.Pass("Adding Module Checked");
+                test.Pass("Branch verification completed successfully.");
             }
             catch (Exception ex)
             {
@@ -112,12 +112,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Adding Client ");
+            test = extent.CreateTest("Client Creation");
 
             try
             {
                 new AddClient(driver, test).AddClientFlow();
-                test.Pass("Client Module Checked");
+                test.Pass("Client verification completed successfully.");
             }
             catch (Exception ex)
             {
@@ -156,12 +156,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Adding Brand");
+            test = extent.CreateTest("Brand Creation");
 
             try
             {
                 new AddBrand(driver, test).AddBrandFlow();
-                test.Pass("Brand Module Checked");
+                test.Pass("Brand verification completed successfully.");
             }
             catch (Exception ex)
             {
@@ -178,12 +178,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Adding Category");
+            test = extent.CreateTest("Category Creation");
 
             try
             {
                 new AddCategory(driver, test).AddCategoryFlow();
-                test.Pass("Category Module Checked");
+                test.Pass("Category verification completed successfully.");
             }
             catch (Exception ex)
             {
@@ -202,12 +202,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Adding SubCategory ");
+            test = extent.CreateTest("SubCategory Creation");
 
             try
             {
                 new AddSubCategory(driver, test).AddSubCategoryFlow();
-                test.Pass("SubCategory Module Checked");
+                test.Pass("SubCategory verification completed successfully.");
             }
             catch (Exception ex)
             {
@@ -225,12 +225,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Adding Product");
+            test = extent.CreateTest("Product Creation");
 
             try
             {
                 new AddProduct(driver, test).AddProductFlow();
-                test.Pass("Product Module Checked");
+                test.Pass("Product verification completed successfully.");
             }
             catch (Exception ex)
             {
@@ -247,12 +247,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Adding Warehouse");
+            test = extent.CreateTest("Warehouse Creation");
 
             try
             {
                 new AddWarehouse(driver, test).AddWarehouseFlow();
-                test.Pass("Warehouse completed");
+                test.Pass("Warehouse verification completed successfully.");
             }
             catch (Exception ex)
             {
@@ -269,12 +269,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Adding Vendor");
+            test = extent.CreateTest("Vendor Creation");
 
             try
             {
                 new AddVendor(driver, test).AddVendorFlow();
-                test.Pass("Vendor Module Checked");
+                test.Pass("Vendor verification completed successfully.");
             }
             catch (Exception ex)
             {
@@ -341,7 +341,7 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Raise Refill Request ");
+            test = extent.CreateTest("Creating and Handling Refill Request ");
 
             try
             {
@@ -365,7 +365,7 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Creating Return Request");
+            test = extent.CreateTest("Creating and Handling Return Request");
 
             try
             {
@@ -852,7 +852,7 @@ public class MachineMapping
                 {
                     machineOptions[i].Click();
                     Console.WriteLine("Mapped machine is: " + optionTexts);
-                    test.Info("Machine with ID: '{optionTexts}' selected for mapping.");
+                    test.Info($"Machine with ID: '{optionTexts}' selected for mapping.");
                     found = true;
                     break;
                 }
