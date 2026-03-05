@@ -1556,13 +1556,11 @@ public class AddWarehouse
             screenshot.SaveAsFile(filePath2);
 
             Console.WriteLine($"Screenshot saved at: {filePath2}");
-            Assert.Fail();
-
             Console.WriteLine(ex.ToString());
             Assert.Fail(ex.Message);
-
         }
     }
+}
 
 
 
@@ -2807,7 +2805,6 @@ public class MachineScrapping
             Assert.Fail(ex.Message);
         }
     }
-}
 }
 
 
