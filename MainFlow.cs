@@ -1421,6 +1421,7 @@ public class AddWarehouse
     private IWebDriver driver;
     private WebDriverWait wait;
     private ExtentTest test;
+    private ITakesScreenshot screenshotDriver;
 
     public AddWarehouse(IWebDriver driver, ExtentTest test)
     {
@@ -1463,9 +1464,9 @@ public class AddWarehouse
                 Thread.Sleep(2000);
                 test.Info($"Searching for warehouse with name: '{searchName}'");
 
-                var rowData = driver.FindElements(By.XPath("//table//tbody/tr"));    //fetching table data
+                var rows = driver.FindElements(By.XPath("//table//tbody/tr"));    //fetching table data
                 bool noData = driver.PageSource.Contains("No Data");
-                if (rowData.Count == 0 || noData)
+                if (rows.Count == 0 || noData)
                 {
                     Console.WriteLine($"Warehouse '{searchName}' not found. Adding Warehouse");
                     test.Info($"The Warehouse '{searchName}' not found. Initiating warehouse creation.");
@@ -1534,11 +1535,34 @@ public class AddWarehouse
         }
         catch (Exception ex)
         {
+            // Take screenshot
+            screenshotDriver = (ITakesScreenshot)driver;
+            Screenshot screenshot = screenshotDriver.GetScreenshot();
+
+            // Jenkins workspace / project root
+            string projectPath3 = Directory.GetCurrentDirectory();
+
+            // Create Screenshots folder
+            string screenshotDir3 = Path.Combine(projectPath3, "Screenshots");
+            Directory.CreateDirectory(screenshotDir3);
+
+            // FIX: remove invalid characters from filename
+            string filePath2 = Path.Combine(
+                screenshotDir3,
+                $"Screenshot_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png"
+            );
+
+            // Save screenshot
+            screenshot.SaveAsFile(filePath2);
+
+            Console.WriteLine($"Screenshot saved at: {filePath2}");
+            Assert.Fail();
+
             Console.WriteLine(ex.ToString());
             Assert.Fail(ex.Message);
+
         }
     }
-}
 
 
 
@@ -1591,9 +1615,9 @@ public class AddVendor
                 Thread.Sleep(2000);
                 test.Info($"Searching for vendor with name: '{searchName}'");
 
-                var rowData = driver.FindElements(By.XPath("//table//tbody/tr"));
+                var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
                 bool noData = driver.PageSource.Contains("No Data");
-                if (rowData.Count == 0 || noData)//fetching table data
+                if (rows.Count == 0 || noData)//fetching table data
                 {
                     Console.WriteLine($"Vendor '{searchName}' not found. Adding Vendor");
                     test.Info($"The Vendor '{searchName}' not found. Initiating vendor creation.");
@@ -2783,6 +2807,7 @@ public class MachineScrapping
             Assert.Fail(ex.Message);
         }
     }
+}
 }
 
 
