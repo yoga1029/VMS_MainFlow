@@ -1752,13 +1752,13 @@ public class Productmapping
             Thread.Sleep(3000);
             IWebElement saveSlots = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//span[contains(text(), ' Save ')]")));
             saveSlots.Click();
-            Thread.Sleep(5000);
+            Thread.Sleep(4000);
             Console.WriteLine("Product Matrix Changed");
             test.Info("Planogram Matrix Updated Successfully.");
 
-            ///* wait for Angular overlay/backdrop to disappear */
-            //wait.Until(ExpectedConditions.InvisibilityOfElementLocated(
-            //    By.ClassName("cdk-overlay-backdrop")));
+            /* wait for Angular overlay/backdrop to disappear */
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(
+                By.ClassName("cdk-overlay-backdrop")));
 
 
             Console.WriteLine("Modifying the machine details");
