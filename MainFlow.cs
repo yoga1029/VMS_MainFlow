@@ -928,7 +928,8 @@ public class AddBrand
 
                 // Check if brand exists
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
-                if (rows.Count == 0)
+                bool noData = driver.PageSource.Contains("No Data");
+                if (rows.Count == 0 || noData)
                 {
                     Console.WriteLine($"Brand '{searchName}' not found. Adding brand");
                     test.Info($"Brand '{searchName}' not found. Adding brand");
@@ -1009,8 +1010,7 @@ public class AddCategory
     {
         this.driver = driver;
         this.test = test;
-        this.test = test;
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(50));
     }
 
     public void AddCategoryFlow()
@@ -1018,7 +1018,7 @@ public class AddCategory
 
         try
         {
-            Thread.Sleep(1000);
+          
             ////Locate Product Module
             //IWebElement productModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Products')]")));
             //productModule.Click();
@@ -1035,12 +1035,18 @@ public class AddCategory
                 IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
+
+                //wait.Until(driver =>
+                //{
+                //    return driver.FindElements(By.XPath("//table//tbody/tr")).Count > 0
+                //        || driver.PageSource.Contains("No data");
+                //});
 
                 // Check if category exists
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
-                Thread.Sleep(3000);
-                if (rows.Count == 0)
+                bool noData = driver.PageSource.Contains("No Data");
+                if (rows.Count == 0 || noData)
                 {
                     Console.WriteLine($"Category '{searchName}' not found. Adding category");
                     test.Info($"Category '{searchName}' not found. Adding category");
@@ -1103,7 +1109,6 @@ public class AddSubCategory
     {
         this.driver = driver;
         this.test = test;
-        this.test = test;
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(70));
     }
 
@@ -1128,9 +1133,18 @@ public class AddSubCategory
                 IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
+
+                //wait.Until(driver =>
+                //{
+                //    return driver.FindElements(By.XPath("//table//tbody/tr")).Count > 0
+                //        || driver.PageSource.Contains("No data");
+                //});
+
+
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
-                if (rows.Count == 0)
+                bool noData = driver.PageSource.Contains("No Data");
+                if (rows.Count == 0 || noData)
                 {
                     Console.WriteLine($"Subcategory '{searchName}' not found. Adding Subcategory");
                     test.Info($"Subcategory '{searchName}' not found. Adding Subcategory");
