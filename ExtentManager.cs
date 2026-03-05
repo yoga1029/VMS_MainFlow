@@ -29,8 +29,10 @@ namespace VMS_MainFlow
 
                         var htmlReporter = new ExtentSparkReporter(reportPath);
 
+
                         htmlReporter.Config.DocumentTitle = "Automation Test Report";
                         htmlReporter.Config.ReportName = "Workflow Test Report";
+                        htmlReporter.Config.CSS = @"td { white-space: nowrap !important; }";
 
                         extent = new ExtentReports();
                         extent.AttachReporter(htmlReporter);

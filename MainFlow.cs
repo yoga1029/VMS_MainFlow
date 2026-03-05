@@ -1,6 +1,11 @@
 ﻿using AventStack.ExtentReports;
+using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Model;
 using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Presentation;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -8,6 +13,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq.Expressions;
 using System.Reflection.PortableExecutable;
@@ -66,7 +72,7 @@ namespace VMS_MainFlow   //same namespace
             try
             {
                 new Login(driver, test).LoginFlow();
-                test.Pass("Successfully Logged in to the Portal");
+                test.Pass("User successfully logged into the portal.");
             }
             catch (Exception ex)
             {
@@ -83,12 +89,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Entering in to Add Branch");
+            test = extent.CreateTest("Adding Branch");
 
             try
             {
                 new AddBranch(driver, test).AddBranchFlow();
-                test.Pass("Adding Branch completed");
+                test.Pass("Adding Module Checked");
             }
             catch (Exception ex)
             {
@@ -105,12 +111,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Entering in to Add Client ");
+            test = extent.CreateTest("Adding Client ");
 
             try
             {
                 new AddClient(driver, test).AddClientFlow();
-                test.Pass("Adding Client completed");
+                test.Pass("Client Module Checked");
             }
             catch (Exception ex)
             {
@@ -127,12 +133,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Machine Mapping Flow");
+            test = extent.CreateTest("Mapping Machine with Client ");
 
             try
             {
                 new MachineMapping(driver, test).ClientMappingWithMachineFlow();
-                test.Pass("Machine mapping completed");
+                test.Pass("Machine-to-client mapping completed successfully.");
             }
             catch (Exception ex)
             {
@@ -149,12 +155,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add Brand Flow");
+            test = extent.CreateTest("Adding Brand");
 
             try
             {
                 new AddBrand(driver, test).AddBrandFlow();
-                test.Pass("Brand completed");
+                test.Pass("Brand Module Checked");
             }
             catch (Exception ex)
             {
@@ -171,12 +177,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add Category Flow");
+            test = extent.CreateTest("Adding Category");
 
             try
             {
                 new AddCategory(driver, test).AddCategoryFlow();
-                test.Pass("Category completed");
+                test.Pass("Category Module Checked");
             }
             catch (Exception ex)
             {
@@ -195,12 +201,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add SubCategory Flow");
+            test = extent.CreateTest("Adding SubCategory ");
 
             try
             {
                 new AddSubCategory(driver, test).AddSubCategoryFlow();
-                test.Pass("SubCategory completed");
+                test.Pass("SubCategory Module Checked");
             }
             catch (Exception ex)
             {
@@ -218,12 +224,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add Product Flow");
+            test = extent.CreateTest("Adding Product");
 
             try
             {
                 new AddProduct(driver, test).AddProductFlow();
-                test.Pass("Product completed");
+                test.Pass("Product Module Checked");
             }
             catch (Exception ex)
             {
@@ -240,7 +246,7 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add Warehouse Flow");
+            test = extent.CreateTest("Adding Warehouse");
 
             try
             {
@@ -262,12 +268,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add Vendor Flow");
+            test = extent.CreateTest("Adding Vendor");
 
             try
             {
                 new AddVendor(driver, test).AddVendorFlow();
-                test.Pass("Vendor completed");
+                test.Pass("Vendor Module Checked");
             }
             catch (Exception ex)
             {
@@ -286,12 +292,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Product Mapping Flow");
+            test = extent.CreateTest("Product Mapping into the slots");
 
             try
             {
                 new Productmapping(driver, test).ProductMappingFlow();
-                test.Pass("Product Mapping completed");
+                test.Pass("Product mapping completed successfully.");
             }
             catch (Exception ex)
             {
@@ -309,12 +315,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Add Purchase Flow");
+            test = extent.CreateTest("Purchasing the Products to Warehouse");
 
             try
             {
                 new AddPurchase(driver, test).AddPurchaseFlow();
-                test.Pass("Purchase completed");
+                test.Pass("Purchase process completed successfully.");
             }
             catch (Exception ex)
             {
@@ -334,12 +340,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Raise Refill Request Flow");
+            test = extent.CreateTest("Raise Refill Request ");
 
             try
             {
                 new RaiseRefillRequest(driver, test).RaiseRefillRequestFlow();
-                test.Pass("Refill Request completed");
+                test.Pass("Refill request process completed successfully.");
             }
             catch (Exception ex)
             {
@@ -358,12 +364,12 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Return Request Flow");
+            test = extent.CreateTest("Creating Return Request");
 
             try
             {
                 new ReturnRequest(driver, test).ReturnRequestFlow();
-                test.Pass("Return Request completed");
+                test.Pass("Return request process completed successfully.");
             }
             catch (Exception ex)
             {
@@ -382,7 +388,7 @@ namespace VMS_MainFlow   //same namespace
             if (previousStepFailed)
                 Assert.Inconclusive("Previous step failed");
 
-            test = extent.CreateTest("Machine Scrapping Flow");
+            test = extent.CreateTest("Scrapping the Machine");
 
             try
             {
@@ -431,15 +437,15 @@ namespace VMS_MainFlow   //same namespace
             //login to portal
             IWebElement login = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("username")));
             login.SendKeys(LoginData.loginSuccess["username"]);
-            test.Info("Username Entered");
+            test.Info("Entered username into the username field.");
 
             IWebElement password = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("password")));
             password.SendKeys(LoginData.loginSuccess["password"]);
-            test.Info("Password Entered");
+            test.Info("Entered password into the password field");
 
             IWebElement loginButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector("button.mat-raised-button")));
             loginButton.Click();
-            test.Info("Login Button Clicked");
+            test.Info("Clicked the Login button.");
             Thread.Sleep(2000);
         }
 
@@ -474,21 +480,22 @@ namespace VMS_MainFlow   //same namespace
                 IWebElement branchListSubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Branch List')]")));
                 branchListSubModule.Click();
                 Thread.Sleep(2000);
-                Console.WriteLine("Entered in to Branch");
-                test.Info("Entered in to Branch");
+                Console.WriteLine("Navigated to Branch module");
+                test.Info("Navigated to Branch module");
 
                 string searchName = AddBranchData.addBranchSuccess["searchName"];
                 IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(3000);
+                test.Info($"Searching for branch with name: '{searchName}' ");
 
                 // Check if branch exists
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
                 if (rows.Count == 0)
                 {
-                    test.Info($"The Branch '{searchName}' not found. Adding Branch");
-                    Console.WriteLine($"The Branch '{searchName}' not found. Adding Branch");
+                    test.Info($"The Branch '{searchName}' not found. Initiating branch creation..");
+                    Console.WriteLine($"The Branch '{searchName}' not found. Initiating branch creation..");
 
                     // Navigate to add branch page
                     IWebElement addBranchButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -543,6 +550,9 @@ namespace VMS_MainFlow   //same namespace
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(4000);
 
+                    test.Info($"The Branch '{searchName}' created successfully");
+                    Console.WriteLine($"The Branch '{searchName}' created successfully");
+
                     //// Upload Branch Image
                     //IWebElement branchLogo = wait.Until(ExpectedConditions.ElementExists(By.Id("fileUpload")));
                     //branchLogo.SendKeys(AddBranchData.addBranchSuccess["fileUpload"]);
@@ -554,8 +564,9 @@ namespace VMS_MainFlow   //same namespace
                 }
                 else
                 {
-                    Console.WriteLine($"The Branch '{searchName}' is already found.");
-                    test.Info($"The Branch '{searchName}'is already found.");
+                    Console.WriteLine($"The Branch '{searchName}' is already exists.");
+
+                    test.Info($"The Branch '{searchName}'  already exists. Skipping branch creation..");
                 }
             }
             catch (Exception ex)
@@ -597,8 +608,8 @@ public class AddClient
             IWebElement clientButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Company1")));
             clientButton.Click();
             Thread.Sleep(2000);
-            Console.WriteLine("Entered in to Client");
-            test.Info("Entered in to Client");
+            Console.WriteLine("Navigated to Client module.");
+            test.Info("");
 
             for (int i = 0; i < AddClientData.Clients.GetLength(0); i++)
             {
@@ -607,13 +618,14 @@ public class AddClient
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(2000);
-                var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
+                test.Info($"Searching for client with name: '{searchName}' ");
 
+                var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
                 // Check if client exists
                 if (rows.Count == 0)
                 {
-                    Console.WriteLine($"Client '{searchName}' not found. Adding Client");
-                    test.Info($"Client '{searchName}' not found. Adding Client");
+                    Console.WriteLine($"Client '{searchName}' not found. Initiating client creation..");
+                    test.Info($"Client '{searchName}' not found. Initiating client creation..");
 
                     // Navigate to add client page
                     IWebElement addClientButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -641,11 +653,13 @@ public class AddClient
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(2000);
 
+                    Console.WriteLine($"Client '{searchName}' created successfully.");
+                    test.Info($"Client '{searchName}' created successfully.");
                 }
                 else
                 {
-                    Console.WriteLine($"The Client '{searchName}' is already found.");
-                    test.Info($"The Client '{searchName}' is already found.");
+                    Console.WriteLine($"The Client '{searchName}' is already exists. Skipping client creation..");
+                    test.Info($"The Client '{searchName}' is already exists. Skipping client creation..");
                 }
             }
         }
@@ -692,12 +706,12 @@ public class MachineMapping
             machineList.Click();
             Thread.Sleep(6000);
 
-            test.Info("Started mapping the machine with client");
+            test.Info("Initiated machine-to-client mapping process.");
             Console.WriteLine("Started mapping the machine with client");
             // Get all rows 
             var machineRows = wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.CssSelector("table tbody tr"))).ToList();
             Console.WriteLine("Total Machines Found: " + machineRows.Count);
-            test.Info("Total Machines Found: " + machineRows.Count);
+            test.Info("Total machines identified: " + machineRows.Count);
 
             //store unmapped machines
             List<IWebElement> unmappedMachines = new List<IWebElement>();
@@ -712,14 +726,14 @@ public class MachineMapping
                 }
             }
 
-            test.Info("Unmapped Machines Count: " + unmappedMachines.Count);
-            Console.WriteLine("Unmapped Machines Count: " + unmappedMachines.Count);
+            test.Info("Number of unmapped machines: " + unmappedMachines.Count);
+            Console.WriteLine("Number of unmapped machines: " + unmappedMachines.Count);
             if (unmappedMachines.Count > 0)
             {
                 var firstUnmappedRow = unmappedMachines.First();
                 string firstUnmappedMachineId = firstUnmappedRow.FindElements(By.TagName("td"))[0].Text;
-                Console.WriteLine("First Unmapped Machine Id: " + firstUnmappedMachineId);
-                test.Info("First Unmapped Machine Id: " + firstUnmappedMachineId);
+                Console.WriteLine("First unmapped machine identified with ID: " + firstUnmappedMachineId);
+                test.Info("First unmapped machine identified with ID: " + firstUnmappedMachineId);
                 // Store for further mapping
                 unmappedMachineForMapping = firstUnmappedMachineId;
             }
@@ -729,7 +743,7 @@ public class MachineMapping
                 test.Info("No unmapped machines found.");
             }
 
-            test.Info("Entered in to Purchase Order");
+            test.Info("Navigated to the Purchase Order module.");
             // Navigate to Purchase Order menu
             IWebElement purchaseOrderButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),'Purchase Order')]")));
             purchaseOrderButton.Click();
@@ -837,7 +851,7 @@ public class MachineMapping
                 {
                     machineOptions[i].Click();
                     Console.WriteLine("Mapped machine is: " + optionTexts);
-                    test.Info("Mapped machine is: " + optionTexts);
+                    test.Info("Machine with ID: '{optionTexts}' selected for mapping.");
                     found = true;
                     break;
                 }
@@ -863,8 +877,7 @@ public class MachineMapping
             save.Click();
             Thread.Sleep(3000);
             Console.WriteLine($"The Client '{clientName1}' is mapped with " + optionTexts);
-            test.Info($"The Client '{clientName1}' is mapped with " + optionTexts);
-
+            test.Info($" Client '{clientName1}' successfully mapped to machine ID " + optionTexts);
         }
 
         catch (Exception ex)
@@ -916,6 +929,7 @@ public class AddBrand
             IWebElement brandListSubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Brand ')]")));
             brandListSubModule.Click();
             Thread.Sleep(4000);
+            test.Info("Navigated to Brand module");
 
             for (int i = 0; i < AddBrandData.Brands.GetLength(0); i++)
             {
@@ -925,6 +939,8 @@ public class AddBrand
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(3000);
+                test.Info($"Searching for brand with name: '{searchName}'");
+
 
                 // Check if brand exists
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
@@ -932,7 +948,7 @@ public class AddBrand
                 if (rows.Count == 0 || noData)
                 {
                     Console.WriteLine($"Brand '{searchName}' not found. Adding brand");
-                    test.Info($"Brand '{searchName}' not found. Adding brand");
+                    test.Info($"The Brand '{searchName}' not found. Initiating brand creation..");
                     // Click Add button
                     IWebElement addBrandButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
                     addBrandButton.Click();
@@ -954,11 +970,13 @@ public class AddBrand
 
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(3000);
+                    test.Info($"The Brand '{searchName}' created successfully");
+
                 }
                 else
                 {
                     Console.WriteLine($"Brand '{searchName}' already exists.");
-                    test.Info($"Brand '{searchName}' already exists.");
+                    test.Info($"The Brand '{searchName}' already exists. Skipping brand creation..");
                 }
             }
         }
@@ -1027,6 +1045,7 @@ public class AddCategory
             IWebElement categorySubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Categories ')]")));
             categorySubModule.Click();
             Thread.Sleep(4000);
+            test.Info("Navigated to Category module");
 
 
             for (int i = 0; i < AddCategoryData.Categories.GetLength(0); i++)
@@ -1036,6 +1055,7 @@ public class AddCategory
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(2000);
+                test.Info($"Searching for category with name: '{searchName}'");
 
                 //wait.Until(driver =>
                 //{
@@ -1049,7 +1069,7 @@ public class AddCategory
                 if (rows.Count == 0 || noData)
                 {
                     Console.WriteLine($"Category '{searchName}' not found. Adding category");
-                    test.Info($"Category '{searchName}' not found. Adding category");
+                    test.Info($"The Category '{searchName}' not found. Initiating category creation..");
 
 
                     // Navigate to add catgeory page
@@ -1078,12 +1098,14 @@ public class AddCategory
 
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(3000);
+                    test.Info($"The Category '{searchName}' created successfully");
+
 
                 }
                 else
                 {
                     Console.WriteLine($"Category '{searchName}' already exists.");
-                    test.Info($"Category '{searchName}' already exists.");
+                    test.Info($"The Category '{searchName}' already exists. Skipping category creation..");
                 }
             }
         }
@@ -1125,6 +1147,7 @@ public class AddSubCategory
             IWebElement subCategory = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Sub Categories ')]")));
             subCategory.Click();
             Thread.Sleep(4000);
+            test.Info("Navigated to Sub Category module");
 
 
             for (int i = 0; i < AddSubCategoryData.SubCategory.GetLength(0); i++)
@@ -1134,6 +1157,7 @@ public class AddSubCategory
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(2000);
+                test.Info($"Searching for sub category with name: '{searchName}'");
 
                 //wait.Until(driver =>
                 //{
@@ -1147,7 +1171,7 @@ public class AddSubCategory
                 if (rows.Count == 0 || noData)
                 {
                     Console.WriteLine($"Subcategory '{searchName}' not found. Adding Subcategory");
-                    test.Info($"Subcategory '{searchName}' not found. Adding Subcategory");
+                    test.Info($"The Sub Category '{searchName}' not found. Initiating sub category creation..");
 
                     // Navigate to add subcatgeory page
                     IWebElement addSubCategoryButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -1188,11 +1212,13 @@ public class AddSubCategory
 
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(3000);
+                    test.Info($"The Sub Category '{searchName}' created successfully");
+
                 }
                 else
                 {
                     Console.WriteLine($"Subcategory '{searchName}' already exists.");
-                    test.Info($"Subcategory '{searchName}' already exists.");
+                    test.Info($"The Sub Category '{searchName}' already exists. Skipping sub category creation..");
                 }
             }
         }
@@ -1239,6 +1265,7 @@ public class AddProduct
             IWebElement productList = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Product List ')]")));
             productList.Click();
             Thread.Sleep(2000);
+            test.Info("Navigated to Product module");
 
             for (int i = 0; i < AddProductData.Products.GetLength(0); i++)
             {
@@ -1256,13 +1283,14 @@ public class AddProduct
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(3000);
+                test.Info($"Searching for product with name: '{searchName}'");
 
                 // Check if product exists
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
                 if (rows.Count == 0)
                 {
                     Console.WriteLine($"Product '{searchName}' not found. Adding Product");
-                    test.Info($"Product '{searchName}' not found. Adding Product");
+                    test.Info($"The Product '{searchName}' not found. Initiating product creation..");
 
                     // Navigate to add product page
                     IWebElement addProductButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -1359,6 +1387,7 @@ public class AddProduct
 
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(3000);
+                    test.Info($"The Product '{searchName}' created successfully");
 
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Cancel')]")).Click();
                     Thread.Sleep(3000);
@@ -1367,7 +1396,7 @@ public class AddProduct
                 else
                 {
                     Console.WriteLine($"Product '{searchName}' already exists.");
-                    test.Info($"Product '{searchName}' already exists.");
+                    test.Info($"The Product '{searchName}' already exists. Skipping product creation..");
                 }
             }
         }
@@ -1411,6 +1440,7 @@ public class AddWarehouse
             IWebElement warehouseList = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Warehouse0")));
             warehouseList.Click();
             Thread.Sleep(2000);
+            test.Info("Navigated to Warehouse module");
 
             for (int i = 0; i < AddWarehouseData.Warehouses.GetLength(0); i++)
             {
@@ -1429,12 +1459,13 @@ public class AddWarehouse
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(2000);
+                test.Info($"Searching for warehouse with name: '{searchName}'");
 
                 var rowData = driver.FindElements(By.XPath("//table//tbody/tr"));    //fetching table data
                 if (rowData.Count == 0)
                 {
                     Console.WriteLine($"Warehouse '{searchName}' not found. Adding Warehouse");
-                    test.Info($"Warehouse '{searchName}' not found. Adding Warehouse");
+                    test.Info($"The Warehouse '{searchName}' not found. Initiating warehouse creation.");
 
                     // Navigate to add warehouse page
                     IWebElement addWarehouseButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -1487,11 +1518,13 @@ public class AddWarehouse
 
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(2000);
+                    test.Info($"The Warehouse '{searchName}' created successfully");
+
                 }
                 else
                 {
                     Console.WriteLine($"Warehouse '{searchName}' already exists.");
-                    test.Info($"Warehouse '{searchName}' already exists.");
+                    test.Info($"The Warehouse '{searchName}' already exists. Skipping warehouse creation.");
                 }
 
             }
@@ -1536,6 +1569,7 @@ public class AddVendor
             IWebElement vendorList = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-Warehouse1")));
             vendorList.Click();
             Thread.Sleep(2000);
+            test.Info("Navigated to Vendor module");
 
             for (int i = 0; i < AddWarehouseData.Vendors.GetLength(0); i++)
             {
@@ -1552,12 +1586,13 @@ public class AddVendor
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(2000);
+                test.Info($"Searching for vendor with name: '{searchName}'");
 
                 var rowData = driver.FindElements(By.XPath("//table//tbody/tr"));    //fetching table data
                 if (rowData.Count == 0)
                 {
                     Console.WriteLine($"Vendor '{searchName}' not found. Adding Vendor");
-                    test.Info($"Vendor '{searchName}' not found. Adding Vendor");
+                    test.Info($"The Vendor '{searchName}' not found. Initiating vendor creation.");
 
                     // Navigate to add warehouse page
                     IWebElement addVendorButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class,'add_fab')]")));
@@ -1587,12 +1622,14 @@ public class AddVendor
 
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(2000);
+                    test.Info($"The Vendor '{searchName}' created successfully");
+
 
                 }
                 else
                 {
                     Console.WriteLine($"Vendor '{searchName}' already exists.");
-                    test.Info($"Vendor '{searchName}' already exists.");
+                    test.Info($"The Vendor '{searchName}' already exists. Skipping vendor creation.");
                 }
             }
         }
@@ -1638,11 +1675,11 @@ public class Productmapping
             machineList.Click();
             Thread.Sleep(1000);
             Console.WriteLine("Entered into machine list page");
-            test.Info("Entered into machine list page");
+            test.Info("Navigated to the Machine List page.");
 
             string machineId = MachineMapping.unmappedMachineForMapping;
             Console.WriteLine("Selecting machine: " + machineId);
-            test.Info("Selected machine: " + machineId);
+            test.Info("Selected machine with ID: " + machineId);
 
             IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
             searchText.Clear();
@@ -1661,7 +1698,7 @@ public class Productmapping
             Thread.Sleep(3000);
             Console.WriteLine("Machine Details Opened");
 
-            test.Info("Editing the Planogram..");
+            test.Info("Editing the planogram configuration..");
             //Edit Planogram
             IWebElement editSlot = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[@mattooltip='Edit Slot']")));
             editSlot.Click();
@@ -1691,7 +1728,7 @@ public class Productmapping
             saveSlots.Click();
             Thread.Sleep(5000);
             Console.WriteLine("Product Matrix Changed");
-            test.Info("Planogram Matrix Changed");
+            test.Info("Planogram Matrix Updated Successfully.");
 
             ///* wait for Angular overlay/backdrop to disappear */
             //wait.Until(ExpectedConditions.InvisibilityOfElementLocated(
@@ -1699,7 +1736,7 @@ public class Productmapping
 
 
             Console.WriteLine("Modifying the machine details");
-            test.Info("Modifying the machine details");
+            test.Info("Updating machine configuration details.");
             IWebElement editInfo = wait.Until(
                 ExpectedConditions.ElementIsVisible(By.XPath("//button[@mattooltip='Edit Info']")));
             editInfo.Click();
@@ -1722,32 +1759,32 @@ public class Productmapping
 
             string locationValue = machineInfoData.machineDetails[0, 0] + RandomHelper.GetRandomAlphabet();
             clientLocation.SendKeys(locationValue);
-            test.Info($"Client Location is modified as: '{locationValue}'");
+            test.Info($"Client Location updated to: '{locationValue}'");
 
             IWebElement routeIdentifier = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("routeIdentifier")));
             routeIdentifier.Clear();
 
             string routeValue = machineInfoData.machineDetails[0, 1] + RandomHelper.GetRandomAlphabet();
             routeIdentifier.SendKeys(routeValue);
-            test.Info($"Route is modified as: '{routeValue}'");
+            test.Info($"Route updated to: '{routeValue}'");
 
 
-            test.Info("Checking the status of Direct Refill");
+            test.Info("Checking Direct Refill status.");
             // Direct Refill checkbox
             IWebElement directRefillCheckbox = wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//input[@name='directRefill']")));
 
             if (directRefillCheckbox.Selected)
             {
                 Console.WriteLine("Direct Refill is checked. Unchecking now..");
-                test.Info("Direct Refill is checked. Unchecking now..");
+                test.Info("Direct Refill is enabled. Disabling it now..");
                 IWebElement directRefillLabel = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'Direct Refill Option')]")));
                 directRefillLabel.Click();
                 Thread.Sleep(1000); // allow Auto Refill to enable
             }
             else
             {
-                Console.WriteLine("Direct Refill is already unchecked. Moving to check the status of Auto Refill...");
-                test.Info("Direct Refill is already unchecked. Moving to check the status of Auto Refill...");
+                Console.WriteLine("Direct Refill is already disabled. Proceeding to verify Auto Refill status....");
+                test.Info("Direct Refill is already disabled. Proceeding to verify Auto Refill status...");
             }
 
             // Auto Refill checkbox
@@ -1755,16 +1792,16 @@ public class Productmapping
 
             if (autoRefillCheckbox.Selected)
             {
-                Console.WriteLine("Disable Auto Refill is checked. Unchecking now..");
-                test.Info("Disable Auto Refill is checked. Unchecking now..");
+                Console.WriteLine("Auto Refill is enabled. Disabling it now..");
+                test.Info(" Auto Refill is enabled. Disabling it now..");
                 IWebElement autoRefillLabel = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'Disable Auto Refill')]")));
                 autoRefillLabel.Click();
                 Thread.Sleep(1000);
             }
             else
             {
-                Console.WriteLine("Disable Auto Refill is already unchecked. Saving..");
-                test.Info("Disable Auto Refill is already unchecked. Saving..");
+                Console.WriteLine("Auto Refill is already disabled. Saving configuration..");
+                test.Info("Auto Refill is already disabled. Saving configuration..");
             }
             Thread.Sleep(2000);
 
@@ -1777,7 +1814,7 @@ public class Productmapping
 
             //// Edit Single Slot 
             Console.WriteLine("Product Mapping in to slots...");
-            test.Info("Started Mapping in to slots...");
+            test.Info("Initiating product slot mapping..");
             Thread.Sleep(3000);
             Actions a = new Actions(driver);
 
@@ -1874,7 +1911,7 @@ public class Productmapping
             IWebElement saveSlots1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(), ' Save ')]")));
             saveSlots1.Click();
             Console.WriteLine("Product Matrix Changed again");
-            test.Info("Product Matrix Changed again and exited from the page");
+            test.Info("Product matrix updated and exited from the configuration page.");
             Thread.Sleep(2000);
 
 
@@ -1971,7 +2008,7 @@ public class AddPurchase
         purchaseMenu.Click();
         Thread.Sleep(2000);
 
-        test.Info("Started Purchasing the mapped products");
+        test.Info("Initiated purchase process for the mapped products.");
         IWebElement AddWarehousePurchase = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains (@mattooltip, 'Add Warehouse Purchase')]")));
         AddWarehousePurchase.Click();
         Thread.Sleep(1000);
@@ -1979,7 +2016,7 @@ public class AddPurchase
         string warehouseName = AddPurchaseData.Purchases[0, 0];
         string dynamicWarehouseXPath = $"//span[text()=' {warehouseName} ']";
         driver.FindElement(By.XPath(dynamicWarehouseXPath)).Click();
-        test.Info($"The Warehouse'{warehouseName}' selected for purchasing the products");
+        test.Info($"Warehouse'{warehouseName}' selected for purchasing the products.");
 
         try
         {
@@ -1987,43 +2024,13 @@ public class AddPurchase
             for (int i = 0; i < AddPurchaseData.Purchases.GetLength(0); i++)
             {
 
-                ////Filter by product
-                //IWebElement productFilter = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//mat-select[@role = 'listbox'])[2]")));
-                //productFilter.Click();
-                //Thread.Sleep(2000);
-
-                //IWebElement selectProductName = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains (text(), ' Product Name ')]")));
-                //selectProductName.Click();
-                //Thread.Sleep(2000);
-
-
-                //string chooseProductName = AddPurchaseData.Purchases[i, 5];
-                //IWebElement enterProductName = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
-                //enterProductName.Click();
-                //enterProductName.Clear();
-                //enterProductName.SendKeys(chooseProductName + Keys.Enter);
-
-                //var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
-                //if (rows.Count == 0)
-                //{
-                //Console.WriteLine($"Product not found. Adding Purchase of the product");
-                //IWebElement AddWarehousePurchase = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains (@mattooltip, 'Add Warehouse Purchase')]")));
-                //AddWarehousePurchase.Click();
-                //Thread.Sleep(1000);
-
-                //driver.FindElement(By.Name("warehouse")).Click();
-                //string warehouseName = AddPurchaseData.Purchases[0, 0];
-                //string dynamicWarehouseXPath = $"//span[text()=' {warehouseName} ']";
-                //driver.FindElement(By.XPath(dynamicWarehouseXPath)).Click();
-
-
 
                 // Add Purchase Page
                 driver.FindElement(By.Name("vendor")).Click();
                 string vendorName = AddPurchaseData.Purchases[i, 1];
                 string dynamicVendorXPath = $"//span[text()=' {vendorName} ']";
                 driver.FindElement(By.XPath(dynamicVendorXPath)).Click();
-                test.Info($"The Vendor '{vendorName}' selected for purchasing the products");
+                test.Info($"Vendor '{vendorName}' selected for purchasing the products.");
 
                 driver.FindElement(By.Name("productId")).Click();
                 string productName = AddPurchaseData.Purchases[i, 2];
@@ -2081,14 +2088,14 @@ public class AddPurchase
                 IWebElement addButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Add ']")));
                 addButton.Click();
                 Thread.Sleep(2000);
-
+                test.Info("All mapped products have been successfully added for purchase.");
 
 
             }
             IWebElement saveButton1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveButton1.Click();
             Thread.Sleep(2000);
-            test.Info("All Mapped Products are Purchased.");
+            test.Info("Purchase process completed successfully.");
         }
         catch (Exception ex)
         {
@@ -2138,6 +2145,7 @@ public class RaiseRefillRequest
             machineFilter.Clear();
             machineFilter.SendKeys(MachineMapping.unmappedMachineForMapping /* "2VE0000223" */ + Keys.Enter);
             Thread.Sleep(3000);
+            test.Info($"Selected machine '{MachineMapping.unmappedMachineForMapping}' for raising the refill request.");
 
             //CHANGING OPERTION STATUS to Down Planned
             // Action Button 
@@ -2168,7 +2176,7 @@ public class RaiseRefillRequest
             driver.Navigate().Back();
             Thread.Sleep(4000);
             Console.WriteLine("Status of the Machine is set to Down Planned");
-            test.Info("Status of the Machine is set to Down Planned");
+            test.Info($" '{MachineMapping.unmappedMachineForMapping}' - Machine status updated to 'Down Planned'.");
 
 
             IWebElement machineFilter1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@name = 'searchText']")));
@@ -2177,7 +2185,6 @@ public class RaiseRefillRequest
             machineFilter1.SendKeys(MachineMapping.unmappedMachineForMapping /* "2VE0000223" */ + Keys.Enter);
             Thread.Sleep(5000);
             Console.WriteLine("Machine is picked for raise refill");
-            test.Info($"Machine picked for raising refill request is '{MachineMapping.unmappedMachineForMapping}'");
 
             //Raising refill request
             IWebElement actionButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[10]")));
@@ -2192,7 +2199,7 @@ public class RaiseRefillRequest
             saveRequest.Click();
             Thread.Sleep(3000);
             Console.WriteLine("Refill Request Created");
-            test.Info($"Refill Request Created for Machine ID: '{MachineMapping.unmappedMachineForMapping}'");
+            test.Info($"Refill request successfully created for machine '{MachineMapping.unmappedMachineForMapping}'");
 
             ////Warehouse Assigning
             //IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
@@ -2226,6 +2233,7 @@ public class RaiseRefillRequest
             wait.Until(ExpectedConditions.ElementToBeClickable(refillRequestMenu));
             refillRequestMenu.Click();
             Thread.Sleep(3000);
+            test.Info("Navigated to Warehouse Transactions module to process the refill request.");
 
             IWebElement actionButton1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[13]")));
             actionButton1.Click();
@@ -2245,7 +2253,7 @@ public class RaiseRefillRequest
             IWebElement saveWarehouse = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveWarehouse.Click();
             Thread.Sleep(3000);
-            test.Info($"Warehouse assigned for refilling the Machine : '{MachineMapping.unmappedMachineForMapping}'");
+            test.Info($" {chooseWarehouse} assigned for refilling the stock for the machine with ID : '{MachineMapping.unmappedMachineForMapping}'");
 
 
             //Stock Selection
@@ -2255,7 +2263,7 @@ public class RaiseRefillRequest
             IWebElement selectStock = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(text(),' Select Stock ')]")));
             selectStock.Click();
             Thread.Sleep(2000);
-
+            test.Info("Selected required stock items from the warehouse for refill.");
 
             // Check Stock Availability and Collect Out-of-Stock Products
             List<(string ProductName, string ReqQty)> outOfStockList = new List<(string, string)>();
@@ -2290,14 +2298,14 @@ public class RaiseRefillRequest
                 IWebElement completeRefill = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(text(),' Complete Refill ')]")));
                 completeRefill.Click();
                 Thread.Sleep(2000);
-                test.Info($"Refill Request Accepted for the Machine : '{MachineMapping.unmappedMachineForMapping}'");
+                test.Info("Machine successfully refilled with the selected stock items");
 
                 IWebElement checkAllButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[normalize-space()='Check All']")));
                 checkAllButton.Click();
                 Thread.Sleep(2000);
                 driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                 Thread.Sleep(4000);
-                test.Info($"Refill Request Completed for the Machine : '{MachineMapping.unmappedMachineForMapping}'");
+                test.Info($"Refill request process completed successfully for the Machine : '{MachineMapping.unmappedMachineForMapping}'");
 
 
                 //Fetching Machine List
@@ -2326,9 +2334,7 @@ public class RaiseRefillRequest
                 machineDetails1.Click();
                 Thread.Sleep(3000);
 
-                //Operation Status
-                Console.WriteLine("Setting the Status of the Machine to ONLINE");
-              
+                //Operation Status              
                 IWebElement selectStatus1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[contains(text(),'Operation Status')]/following::a[1]")));
                 selectStatus1.Click();
                 Thread.Sleep(1000);
@@ -2342,7 +2348,9 @@ public class RaiseRefillRequest
                 IWebElement saveStatus1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
                 saveStatus1.Click();
                 Thread.Sleep(2000);
-                test.Info("Status of the Machine is set to ONLINE");
+                test.Info($" '{MachineMapping.unmappedMachineForMapping}' - Machine status updated to 'Online'.");
+                Console.WriteLine($" '{MachineMapping.unmappedMachineForMapping}' - Machine status updated to 'Online'.");
+
             }
         }
         catch (Exception ex)
@@ -2404,7 +2412,7 @@ public class ReturnRequest
             //Fill the input fields
             string machineId = /*"2VE0000224"*/ MachineMapping.unmappedMachineForMapping;
             Console.WriteLine("Selected machine for returning products: " + machineId);
-            test.Info("Machine selected for return its products is : " + machineId);
+            test.Info($"Selected machine '{machineId}' for initiating the return request.");
 
             // Machines → Requests → Return
             //Fetching Machine List
@@ -2461,7 +2469,7 @@ public class ReturnRequest
             driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
             Thread.Sleep(3000);
 
-            test.Info("Return Request Created for Machine ID: " + machineId);
+            test.Info("Return Request Successfully Created for Machine : " + machineId);
             //Warehouse Assigning to Return the products
             IWebElement warTransactionsButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("menuItem-W. Transactions")));
          
@@ -2500,6 +2508,7 @@ public class ReturnRequest
             searchRequest.Clear();
             searchRequest.SendKeys(/*MachineMapping.unmappedMachineForMapping */ machineId + Keys.Enter);
             Thread.Sleep(2000);
+            test.Info("Navigated to Warehouse Transactions module to process the return request.");
 
             IWebElement actionButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[11]")));
             actionButton.Click();
@@ -2520,7 +2529,7 @@ public class ReturnRequest
             IWebElement saveWarehouse = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Save ']")));
             saveWarehouse.Click();
             Thread.Sleep(3000);
-            test.Info($" {chooseWarehouse} Assigned and Return Request Accepted for Machine ID: " + machineId);
+            test.Info($" {chooseWarehouse} assigned and Return Request accepted for Machine : " + machineId);
 
             IWebElement actionButton1 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[11]")));
             actionButton1.Click();
@@ -2533,6 +2542,7 @@ public class ReturnRequest
             IWebElement confirmPickup = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button//span[text()= ' Pick Up ']")));
             confirmPickup.Click();
             Thread.Sleep(3000);
+            test.Info("Confirmed pickup of stock from the machine.");
 
             IWebElement actionButton2 = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[11]")));
             actionButton2.Click();
@@ -2546,7 +2556,7 @@ public class ReturnRequest
             checkAllButton1.Click();
             driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
             Thread.Sleep(4000);
-            test.Info("Returning the products is completed.");
+            test.Info($"Product return process completed for machine '{machineId}'");
 
             //SETTING LOCATION AND PARAMETERS 
             //Fetching Machine menu
@@ -2597,7 +2607,7 @@ public class ReturnRequest
             saveLocation.Click();
             Console.WriteLine("Machine's Location Updated");
             Thread.Sleep(4000);
-            test.Info("Location of the Machine is Updated.");
+            test.Info("Machine location updated successfully.");
 
 
             //SET PARAMETERS
@@ -2622,6 +2632,7 @@ public class ReturnRequest
             // Build missing parameter list
             List<string> missingParams = expectedParams.Where(p => !presentParams.Contains(p)).ToList();
 
+            test.Info("Check adding parameters.. ");
             Console.WriteLine("Missing Parameters:");
             missingParams.ForEach(Console.WriteLine);
 
@@ -2670,7 +2681,7 @@ public class ReturnRequest
             else
             {
                 Console.WriteLine("All parameters already exist. Nothing to add.");
-                test.Info("All parameters already exist. Nothing to add.");
+                test.Info("All parameters already exist. Nothing to add..");
                 IWebElement closeNow = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//mat-icon[text()='clear']")));
                 closeNow.Click();
                 Thread.Sleep(800);
@@ -2716,7 +2727,7 @@ public class MachineScrapping
         try
         {
 
-
+            test.Info("Navigate to Purchase Order Module to Scrap the Machine");
             Thread.Sleep(2000);
 
             // Navigate to Current Purchase Order submenu
@@ -2739,7 +2750,7 @@ public class MachineScrapping
             string machineId = /*"2VE0000220" */ MachineMapping.unmappedMachineForMapping;
             Console.WriteLine("Selecting machine: " + machineId);
 
-            test.Info("Machine Id that is going to Scrap is :" + machineId);
+            test.Info($"Selected machine '{machineId}' for the scrapping process.");
             IWebElement searchMachine = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//input[@name = 'searchText']")));
             searchMachine.Clear();
             searchMachine.SendKeys(/*MachineMapping.unmappedMachineForMapping */ machineId + Keys.Enter);
@@ -2748,6 +2759,7 @@ public class MachineScrapping
             IWebElement actionButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("(//td)[13]")));
             actionButton.Click();
             Thread.Sleep(1000);
+            test.Info("Initiating scrapping process for machine");
 
             IWebElement scarpButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(text(),' Move to scrap ')]")));
             scarpButton.Click();
@@ -2759,7 +2771,7 @@ public class MachineScrapping
 
             Console.WriteLine("The Machine Scrapped is: " + machineId);
 
-            test.Info("The Machine Scrapped is: " + machineId);
+            test.Info($"Machine '{machineId}' successfully scrapped." );
         }
         catch (Exception ex)
         {
