@@ -5,6 +5,7 @@ using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Presentation;
+using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
@@ -1287,7 +1288,8 @@ public class AddProduct
 
                 // Check if product exists
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
-                if (rows.Count == 0)
+                bool noData = driver.PageSource.Contains("No Data");
+                if (rows.Count == 0 || noData)
                 {
                     Console.WriteLine($"Product '{searchName}' not found. Adding Product");
                     test.Info($"The Product '{searchName}' not found. Initiating product creation..");
@@ -1462,7 +1464,8 @@ public class AddWarehouse
                 test.Info($"Searching for warehouse with name: '{searchName}'");
 
                 var rowData = driver.FindElements(By.XPath("//table//tbody/tr"));    //fetching table data
-                if (rowData.Count == 0)
+                bool noData = driver.PageSource.Contains("No Data");
+                if (rowData.Count == 0 || noData)
                 {
                     Console.WriteLine($"Warehouse '{searchName}' not found. Adding Warehouse");
                     test.Info($"The Warehouse '{searchName}' not found. Initiating warehouse creation.");
@@ -1588,8 +1591,9 @@ public class AddVendor
                 Thread.Sleep(2000);
                 test.Info($"Searching for vendor with name: '{searchName}'");
 
-                var rowData = driver.FindElements(By.XPath("//table//tbody/tr"));    //fetching table data
-                if (rowData.Count == 0)
+                var rowData = driver.FindElements(By.XPath("//table//tbody/tr"));
+                bool noData = driver.PageSource.Contains("No Data");
+                if (rowData.Count == 0 || noData)//fetching table data
                 {
                     Console.WriteLine($"Vendor '{searchName}' not found. Adding Vendor");
                     test.Info($"The Vendor '{searchName}' not found. Initiating vendor creation.");
