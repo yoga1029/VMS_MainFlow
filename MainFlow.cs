@@ -1965,7 +1965,7 @@ public class AddPurchase
         string warehouseName = AddPurchaseData.Purchases[0, 0];
         string dynamicWarehouseXPath = $"//span[text()=' {warehouseName} ']";
         driver.FindElement(By.XPath(dynamicWarehouseXPath)).Click();
-        test.Info($"The Warehouse'{dynamicWarehouseXPath}' selected for purchasing the products");
+        test.Info($"The Warehouse'{warehouseName}' selected for purchasing the products");
 
         try
         {
@@ -2009,13 +2009,13 @@ public class AddPurchase
                 string vendorName = AddPurchaseData.Purchases[i, 1];
                 string dynamicVendorXPath = $"//span[text()=' {vendorName} ']";
                 driver.FindElement(By.XPath(dynamicVendorXPath)).Click();
-                test.Info($"The Vendor '{dynamicVendorXPath}' selected for purchasing the products");
+                test.Info($"The Vendor '{vendorName}' selected for purchasing the products");
 
                 driver.FindElement(By.Name("productId")).Click();
                 string productName = AddPurchaseData.Purchases[i, 2];
                 string dynamicProductXPath = $"//span[contains(text(), ' {productName} ')]";
                 driver.FindElement(By.XPath(dynamicProductXPath)).Click();
-                test.Info($"The product added to purchase is : '{dynamicVendorXPath}' ");
+                test.Info($"The product added to purchase is : '{productName}' ");
 
                 wait.Until(ExpectedConditions.ElementIsVisible(By.Name("qty"))).SendKeys(AddPurchaseData.Purchases[i, 3]);
 
