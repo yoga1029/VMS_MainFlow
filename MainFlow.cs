@@ -442,7 +442,7 @@ namespace VMS_MainFlow   //same namespace
 
             IWebElement password = wait.Until(ExpectedConditions.ElementIsVisible(By.Name("password")));
             password.SendKeys(LoginData.loginSuccess["password"]);
-            test.Info("Entered password into the password field");
+            test.Info("Entered password into the password field.");
 
             IWebElement loginButton = wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector("button.mat-raised-button")));
             loginButton.Click();
@@ -482,14 +482,14 @@ namespace VMS_MainFlow   //same namespace
                 branchListSubModule.Click();
                 Thread.Sleep(2000);
                 Console.WriteLine("Navigated to Branch module");
-                test.Info("Navigated to Branch module");
+                test.Info("Navigated to Branch module.");
 
                 string searchName = AddBranchData.addBranchSuccess["searchName"];
                 IWebElement searchText = wait.Until(ExpectedConditions.ElementToBeClickable(By.Name("searchText")));
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(3000);
-                test.Info($"Searching for branch with name: '{searchName}' ");
+                test.Info($"Searching for branch with name: '{searchName}'. ");
 
                 // Check if branch exists
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
@@ -551,8 +551,8 @@ namespace VMS_MainFlow   //same namespace
                     driver.FindElement(By.XPath("//button//span[contains(text(),'Save')]")).Click();
                     Thread.Sleep(4000);
 
-                    test.Info($"The Branch '{searchName}' created successfully");
-                    Console.WriteLine($"The Branch '{searchName}' created successfully");
+                    test.Info($"The Branch '{searchName}' created successfully.");
+                    Console.WriteLine($"The Branch '{searchName}' created successfully.");
 
                     //// Upload Branch Image
                     //IWebElement branchLogo = wait.Until(ExpectedConditions.ElementExists(By.Id("fileUpload")));
@@ -610,7 +610,7 @@ public class AddClient
             clientButton.Click();
             Thread.Sleep(2000);
             Console.WriteLine("Navigated to Client module.");
-            test.Info("");
+            test.Info("Navigated to Client module.");
 
             for (int i = 0; i < AddClientData.Clients.GetLength(0); i++)
             {
@@ -619,7 +619,7 @@ public class AddClient
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(2000);
-                test.Info($"Searching for client with name: '{searchName}' ");
+                test.Info($"Searching for client with name: '{searchName}'.");
 
                 var rows = driver.FindElements(By.XPath("//table//tbody/tr"));
                 // Check if client exists
@@ -930,7 +930,7 @@ public class AddBrand
             IWebElement brandListSubModule = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[contains(text(),' Brand ')]")));
             brandListSubModule.Click();
             Thread.Sleep(4000);
-            test.Info("Navigated to Brand module");
+            test.Info("Navigated to Brand module.");
 
             for (int i = 0; i < AddBrandData.Brands.GetLength(0); i++)
             {
@@ -940,7 +940,7 @@ public class AddBrand
                 searchText.Clear();
                 searchText.SendKeys(searchName + Keys.Enter);
                 Thread.Sleep(3000);
-                test.Info($"Searching for brand with name: '{searchName}'");
+                test.Info($"Searching for brand with name: '{searchName}'.");
 
 
                 // Check if brand exists
