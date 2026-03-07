@@ -8,6 +8,7 @@ pipeline {
         EMAIL_TO = 'yogeswari@riota.in'
     }
 
+
     stages {	
 
         stage('Run Tests') {
