@@ -2208,7 +2208,7 @@ public class RaiseRefillRequest
             machineFilter1.Click();
             machineFilter1.Clear();
             machineFilter1.SendKeys(MachineMapping.unmappedMachineForMapping /* "2VE0000223" */ + Keys.Enter);
-            Thread.Sleep(3000);
+            Thread.Sleep(4000);
             Console.WriteLine("Machine is picked for raise refill");
 
             //Raising refill request
