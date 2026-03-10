@@ -449,7 +449,6 @@ namespace VMS_MainFlow   //same namespace
             test.Info("Clicked the Login button.");
             Thread.Sleep(2000);
         }
-
     }
     // ================= BRANCH CLASS =================
 
